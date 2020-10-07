@@ -1,7 +1,7 @@
 import Web3 from 'web3'
 import { toBN, BN, isBN } from 'web3-utils'
 import { BigNumber } from 'bignumber.js'
-BigNumber.set({ DECIMAL_PLACES: 18 })
+BigNumber.set({ DECIMAL_PLACES: 18, ROUNDING_MODE: 1 })
 
 const COW_ABI = require('./abis/cow.json');
 
@@ -24,11 +24,11 @@ export class Cow {
 	}
 
 	async stakeTokenAddress() {
-		return this.stakeToken ? this.stakeToken.address : await this.contract.methods.stakeToken().call();
+		return this.stakeToken ? this.stakeToken.address : await this.contract.methods.depositToken().call();
 	}
 
 	async yieldTokenAddress() {
-		return this.yieldToken ? this.stakeToken.address : await this.contract.methods.yieldToken().call();
+		return this.yieldToken ? this.stakeToken.address : await this.contract.methods.degenToken().call();
 	}
 
 	async totalSupply() {
@@ -58,12 +58,12 @@ export class Cow {
 
 	async earned(sender) {
 		let earned = await this.contract.methods.earned(sender).call();
-		return BigNumber(earned).div(this.yieldPrecision);
+		return BigNumber(earned).div(this.yieldPrecision).toFixed(6, 1);
 	}
 
 	async balanceOf(sender) {
 		let balance =  await this.contract.methods.balanceOf(sender).call();
-		return BigNumber(balance).div(this.stakePrecision);
+		return BigNumber(balance).div(this.stakePrecision).toFixed(6, 1);
 	}
 
 	async periodFinish() {
@@ -71,7 +71,7 @@ export class Cow {
 	}
 
 	async duration() {
-		return await this.contract.methods.duration().call();
+		return await this.contract.methods.halvingPeriod().call();
 	}
 
 	async lastUpdateTime() {
@@ -82,11 +82,11 @@ export class Cow {
 		return await this.contract.methods.starttime().call();
 	}
 	async finishTime() {
-		return await this.contract.methods.finishTime().call();
+		return await this.contract.methods.eraPeriod().call();
 	}
 
 	async initreward() {
-		let initReward = await this.contract.methods.initreward().call();
+		let initReward = await this.contract.methods.totalreward().call();
 		return BigNumber(initReward).div(this.yieldPrecision);
 	}
 

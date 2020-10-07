@@ -228,20 +228,20 @@ export default {
     .submit-button{
         width: 200px;
         margin-left: 20px;
-        border-color: #28a745;
-        color: #28a745;
+        border-color: #FFBB00;
+        color: #FFBB00;
         margin-top: 32px;
     }
     .btn-outline-secondary:hover{
         color: white;
-        background-color: #28a745;
-        border-color: #28a745;
+        background-color: #FFBB00;
+        border-color: #FFBB00;
     }
     .address-item{
         margin-bottom:10px;
     }
     .address-item:hover{
-        color: #28a745;
+        color: #FFBB00;
         text-decoration: underline;
         cursor: pointer;
     }

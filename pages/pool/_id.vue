@@ -2,7 +2,7 @@
   <div>
     <div class="row">
       <div class="col-12 text-center">
-        <span class="avatar">{{cow.avatar}}</span>
+        <img :src="cow.image" class="tokenlogo">
         <div class="name">{{cow.name}}</div>
         <div class="desc">{{cow.desc}}</div>
         <br>
@@ -15,7 +15,7 @@
         <div class="card text-center">
           <div class="card-body">
             <h5 class="card-title">{{ rewards }}</h5>
-            <p class="card-text">{{$t('cow.earned')}}</p>
+            <p class="card-text">{{$t('cow.earned', {symbol: cow.yieldToken.symbol})}}</p>
             <b-button block @click="onClaim" variant="success">
              {{$t('cow.harvest')}}
             </b-button>
@@ -28,7 +28,7 @@
             <h5 class="card-title">{{ stakingBalance }} </h5>
             <p class="card-text">{{$t('cow.symbol-staked', {symbol: cow.stakeToken.symbol})}}</p>
             <b-button block @click="onApprove" v-if="stakeAllowance.lte(toBigNumber(stakeAmount))" variant="danger" :disabled="btnApproving">
-              <b-spinner small label="Loading..." v-if="btnApproving"></b-spinner> 
+              <b-spinner small label="Loading..." v-if="btnApproving"></b-spinner>
               {{$t('cow.approve-symbol', {symbol: cow.stakeToken.symbol})}}
             </b-button>
             <b-button block v-else @click="$bvModal.show('stake-modal')" variant="primary">
@@ -103,7 +103,7 @@
           <b-spinner small label="Loading..." v-if="txStatus == 'pending'"></b-spinner>
           <b-icon icon="check-circle" v-if="txStatus == 'mined'"></b-icon>
           <b-icon icon="x-circle" variant="danger" v-if="txStatus == 'error'"></b-icon>
-          {{ txStatus }} 
+          {{ txStatus }}
         </div>
       </template>
 
@@ -124,8 +124,8 @@
 
   export default {
     asyncData({params}) {
-      let cow = config.cows.find((cow)=>{ 
-        return cow.id == params.id 
+      let cow = config.cows.find((cow)=>{
+        return cow.id == params.id
       });
       return {
         cow: cow,
@@ -333,7 +333,7 @@
   .write-form {
     max-width: 30rem;
   }
-  .connect { 
+  .connect {
     background-color: #e9ecef;
     padding: 1rem;
     margin-bottom: 1rem;
@@ -357,5 +357,8 @@
   }
   .tx-status {
     text-transform: capitalize;
+  }
+  .tokenlogo {
+    width: 150px;
   }
 </style>

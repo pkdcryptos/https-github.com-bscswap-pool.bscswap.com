@@ -1,11 +1,6 @@
 <template>
   <div>
     <div>
-      <p>
-        <div class="alert alert-danger" role="alert">
-          {{$t("home.note")}}
-        </div>
-      </p>
       <div class="intro">
         <h3>
           {{$t("home.protocol-name")}}
@@ -18,20 +13,22 @@
     </div>
     <br>
     <div class="price alert alert-success">
-      1 $MILK = {{ priceMILKUSDT.toFixed(4) }} $USDT = {{ priceMILKBNB.toFixed(4) }} $BNB
+      1 $DEGEN = {{ priceDEGENBUSD ? priceDEGENBUSD.toFixed(4) : '--' }} $BUSD /
+      0.00001 $EARTH = {{ priceEARTHBUSD ? priceEARTHBUSD.div(100000).toFixed(4) : '--' }} $BUSD /
+      1 $BHC = {{ priceBHCBUSD ? priceBHCBUSD.toFixed(4) : '--' }} $BUSD
     </div>
 
     <br>
     <div class="row">
       <div class="col-6 cow" v-for="(cow, i) in cows" :key="i">
         <div class="card cow">
-          <span class="avatar">{{cow.avatar}}</span>
           <div class="card-body">
+            <img :src="cow.image" class="tokenlogo">
             <h5 class="card-title title">{{ cow.name }}</h5>
             <!-- <div class="desc">{{ cow.stakeToken.symbol }}</div> -->
             <div class="desc">{{$t("home.card-desc", { symbol: cow.stakeToken.symbol })}}</div>
             <p class="card-text apy"> APY: {{apy[cow.id]}}% </p>
-            <a :href="'/cow/' + cow.id" v-if="cow.initialized" class="btn btn-block btn-success">
+            <a :href="'/pool/' + cow.id" v-if="cow.initialized" class="btn btn-block btn-success">
               {{$t("home.select")}}
             </a>
             <a href="#" v-else class="btn btn-secondary btn-block">{{$t("home.coming-soon")}}</a>
@@ -45,39 +42,48 @@
 
 <script>
   import config from '~/config'
-  import { Pair, Oracle, Erc20Reader, CowReader } from '~/contracts'
+  import { Pair, Erc20Reader, CowReader } from '~/contracts'
   import { BigNumber } from 'bignumber.js'
 
   export default {
     data () {
       return {
         cows: config.cows,
-        priceMILKUSDT: '--',
-        priceMILKBNB: '--',
+        priceDEGENBUSD: null,
+        priceDEGENBNB: null,
+        priceBHCBUSD: null,
+        priceBHCBNB: null,
+        priceEARTHBUSD: null,
+        priceEARTHBNB: null,
         apy: {
           1: '--',
           2: '--',
           3: '--',
-          4: '--'
+          4: '--',
+          5: '--'
         }
       }
     },
     methods: {
-      
+
     },
     async mounted() {
-      let oracle = new Oracle()
       let pair = new Pair()
-      let promises = [ oracle.getPriceOfBNBUSDT(), pair.getPrice(), oracle.getPriceOfDOTBNB() ];
+      let promises = [ pair.getPriceOfBNBBUSD(), pair.getPriceOfDEGENBNB(), pair.getPriceOfBHCBNB(), pair.getPriceOfEARTHBNB(), pair.getPriceOfBUSDBNB() ];
       let prices = await Promise.all(promises);
-      
-      this.priceBNBUSDT =  prices[0];
-      this.priceMILKUSDT = BigNumber(prices[0]).times(BigNumber(prices[1]))
-      this.priceMILKBNB =  BigNumber(prices[1]);
-      this.priceDOTBNB = prices[2];
 
-      console.log("priceDOTBNB=", this.priceDOTBNB);
-      console.log("priceMILKBNB=", this.priceMILKBNB);
+      this.priceDEGENBUSD = BigNumber(prices[0]).times(BigNumber(prices[1]));
+      this.priceDEGENBNB =  BigNumber(prices[1]);
+      this.priceBHCBUSD = BigNumber(prices[0]).times(BigNumber(prices[2]));
+      this.priceBHCBNB =  BigNumber(prices[2]);
+      this.priceEARTHBUSD = BigNumber(prices[0]).times(BigNumber(prices[3]));
+      this.priceEARTHBNB =  BigNumber(prices[3]);
+      this.priceBUSDBNB = BigNumber(prices[4]);
+
+      console.log("priceBNBBUSD=", prices[0]);
+      console.log("priceDEGENBNB=", prices[1]);
+      console.log("priceBHCBNB=", prices[2]);
+      console.log("priceEARTHBNB=", prices[3]);
 
       this.cows.map(async(cow) => {
         if(cow.initialized) {
@@ -88,11 +94,15 @@
           let rewards = rewardRate.times(365 * 24 * 60 * 60).div(balance)
           console.log(cow.name, rewards.toString());
           if(cow.id == 1) {
-            this.apy[1] = rewards.times(100).toFixed(2)
+            this.apy[1] = rewards.times(this.priceBHCBNB).div(this.priceDEGENBNB.plus(1)).times(100).toFixed(2)
           } else if(cow.id == 2) {
-            this.apy[2] = rewards.times(this.priceMILKBNB).div(this.priceDOTBNB).times(100).toFixed(2)
+            this.apy[2] = rewards.times(this.priceBHCBNB).div(this.priceBHCBNB.plus(1)).times(100).toFixed(2)
           } else if(cow.id == 3) {
-            this.apy[3] = rewards.times(this.priceMILKBNB).div(this.priceMILKBNB.plus(1)).times(100).toFixed(2)
+            this.apy[3] = rewards.times(this.priceBHCBNB).div(this.priceEARTHBNB.plus(1)).times(100).toFixed(2)
+          } else if(cow.id == 4) {
+            this.apy[4] = rewards.times(this.priceBHCBNB).div(this.priceBUSDBNB.plus(1)).times(100).toFixed(2)
+          } else if(cow.id == 5) {
+            this.apy[5] = rewards.times(this.priceDEGENBNB).div(this.priceDEGENBNB.plus(1)).times(100).toFixed(2)
           }
         }
         return cow
@@ -116,6 +126,9 @@
   .desc {
     font-size: 0.9rem;
     color: #999;
+  }
+  .tokenlogo {
+    width: 150px;
   }
   .cover img {
     display: inline-block;

@@ -12,21 +12,21 @@ export class Pair {
 	}
 
 	async getPriceOfBHCBNB() {
-		let cow = config.cows.find((t) => t.id == "2");
-		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, cow.bscswap)
-		let reserves = await this.contract.methods.getReserves().call();
-		return reserves[1] / reserves[0]
-	}
-
-	async getPriceOfEARTHBNB() {
 		let cow = config.cows.find((t) => t.id == "3");
 		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, cow.bscswap)
 		let reserves = await this.contract.methods.getReserves().call();
 		return reserves[1] / reserves[0]
 	}
 
+	async getPriceOfEARTHBNB() {
+		let cow = config.cows.find((t) => t.id == "4");
+		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, cow.bscswap)
+		let reserves = await this.contract.methods.getReserves().call();
+		return reserves[1] / reserves[0]
+	}
+
 	async getPriceOfDEGENBNB() {
-		let cow = config.cows.find((t) => t.id == "5");
+		let cow = config.cows.find((t) => t.id == "6");
 		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, cow.bscswap)
 		let reserves = await this.contract.methods.getReserves().call();
 		return reserves[1] / reserves[0]

@@ -4,6 +4,26 @@ module.exports = {
 	cows: [
 		{
 			id: 1,
+			name: "EARTH USDT Pool",
+			image: "https://tokens.bscswap.com/images/0x3BEE8422f2e6F99C43351ebe53B0b7A6c3079255.png",
+			desc: "Halving every week, Withdrawal for EARTH open October 8, 2020 6:00:00 PM UTC +0",
+			totalAmount: 0.9,
+			initialized: true,
+			address: "0xED04964388Af73916fdc4Ef86ABfDb98F96D8ECb",
+			bscswap: "0x38C2b18e5E7f9b3D9ee1F7658cE2172058d99A69",
+			stakeToken: {
+				address: "0x55d398326f99059fF775485246999027B3197955",
+				decimals: 18,
+				symbol: "USDT"
+			},
+			yieldToken: {
+				address: "0x3BEE8422f2e6F99C43351ebe53B0b7A6c3079255",
+				decimals: 18,
+				symbol: "EARTH"
+			}
+		},
+		{
+			id: 2,
 			name: "BHC DEGEN/BNB LP Pool",
 			image: "https://tokens.bscswap.com/images/0xA6381C6Fd8f40A44721eF4f61eDc1a8CCCa7BF3d.png",
 			desc: "Halving every week, Withdrawal open October 8, 2020 6:00:00 AM UTC +0",
@@ -23,7 +43,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 2,
+			id: 3,
 			name: "BHC BHC/BNB LP Pool",
 			image: "https://tokens.bscswap.com/images/0xA6381C6Fd8f40A44721eF4f61eDc1a8CCCa7BF3d.png",
 			desc: "Halving every week, Withdrawal open October 8, 2020 6:00:00 AM UTC +0",
@@ -43,7 +63,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 3,
+			id: 4,
 			name: "BHC EARTH/BNB LP Pool",
 			image: "https://tokens.bscswap.com/images/0xA6381C6Fd8f40A44721eF4f61eDc1a8CCCa7BF3d.png",
 			desc: "Halving every week, Withdrawal open October 8, 2020 6:00:00 AM UTC +0",
@@ -63,7 +83,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 4,
+			id: 5,
 			name: "BHC BNB/BUSD LP Pool",
 			image: "https://tokens.bscswap.com/images/0xA6381C6Fd8f40A44721eF4f61eDc1a8CCCa7BF3d.png",
 			desc: "Halving every week, Withdrawal open October 8, 2020 6:00:00 AM UTC +0",
@@ -83,7 +103,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 5,
+			id: 6,
 			name: "Degenerates Liquidity Staking Pool",
 			image: "https://tokens.bscswap.com/images/0xb37B51C5C4C934468B49b55FeC15e76c9b538fF3.png",
 			desc: "Halving every year, 1 DEGEN required on your account to participate, Withdrawal open October 6, 2020 5:00:00 PM UTC +0",

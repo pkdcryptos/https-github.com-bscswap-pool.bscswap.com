@@ -61,7 +61,8 @@
           3: '--',
           4: '--',
           5: '--',
-          6: '--'
+          6: '--',
+          7: '--'
         }
       }
     },
@@ -95,17 +96,19 @@
           let rewards = rewardRate.times(365 * 24 * 60 * 60).div(balance)
           console.log(cow.name, rewards.toString());
           if(cow.id == 1) {
-            this.apy[1] = rewards.times(100).toFixed(2)
+            this.apy[1] = "Infinity"
           } else if(cow.id == 2) {
-            this.apy[2] = rewards.times(this.priceBHCBNB).div(this.priceDEGENBNB.plus(1)).times(100).toFixed(2)
+            this.apy[2] = rewards.times(100000000).toFixed(2)
           } else if(cow.id == 3) {
-            this.apy[3] = rewards.times(this.priceBHCBNB).div(this.priceBHCBNB.plus(1)).times(100).toFixed(2)
+            this.apy[3] = rewards.times(this.priceBHCBNB).div(this.priceDEGENBNB.plus(1)).times(100).toFixed(2)
           } else if(cow.id == 4) {
-            this.apy[4] = rewards.times(this.priceBHCBNB).div(this.priceEARTHBNB.plus(1)).times(100).toFixed(2)
+            this.apy[4] = rewards.times(this.priceBHCBNB).div(this.priceBHCBNB.plus(1)).times(100).toFixed(2)
           } else if(cow.id == 5) {
-            this.apy[5] = rewards.times(this.priceBHCBNB).div(this.priceBUSDBNB.plus(1)).times(100).toFixed(2)
+            this.apy[5] = rewards.times(this.priceBHCBNB).div(this.priceEARTHBNB.plus(1)).times(100).toFixed(2)
           } else if(cow.id == 6) {
-            this.apy[6] = rewards.times(this.priceDEGENBNB).div(this.priceDEGENBNB.plus(1)).times(100).toFixed(2)
+            this.apy[6] = rewards.times(this.priceBHCBNB).div(this.priceBUSDBNB.plus(1)).times(100).toFixed(2)
+          } else if(cow.id == 7) {
+            this.apy[7] = rewards.times(this.priceDEGENBNB).div(this.priceDEGENBNB.plus(1)).times(100).toFixed(2)
           }
         }
         return cow

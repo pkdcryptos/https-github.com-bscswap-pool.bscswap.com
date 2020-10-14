@@ -113,7 +113,7 @@
 
 <style>
   .header {
-    background-color: #FFBB00;
+    background-color: #4C4C4C;
     padding: 0.5rem;
     margin-bottom: 2rem;
     color: #fff;
@@ -136,7 +136,7 @@
     height: 32px;
   }
   .main {
-    min-height: calc(100vh - 144px);
+    min-height: calc(100vh - 80px);
   }
 
   .footer {

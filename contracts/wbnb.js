@@ -18,7 +18,7 @@ export class Wbnb {
 	async balanceOf(user) {
 		let balance = await this.contract.methods.balanceOf(user).call();
 		let precision = await this.getPrecision()
-		return new BigNumber(balance).div(precision).toFixed(6, 1);
+		return new BigNumber(balance).div(precision).toFixed(8, 1);
 	}
 
 	async getPrecision() {

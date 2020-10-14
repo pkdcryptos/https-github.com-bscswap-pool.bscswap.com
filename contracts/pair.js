@@ -11,22 +11,43 @@ export class Pair {
 		this.web3 = new Web3(new Web3.providers.HttpProvider(config.web3Provider));
 	}
 
+	async getPriceOfBSWAPUSDT() {
+		let cow = config.cows.find((t) => t.id == "1");
+		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, cow.bscswap)
+		let reserves = await this.contract.methods.getReserves().call();
+		return reserves[0] / reserves[1]
+	}
+
+	async getPriceOfRABBITUSDT() {
+		let cow = config.cows.find((t) => t.id == "5");
+		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, cow.bscswap)
+		let reserves = await this.contract.methods.getReserves().call();
+		return reserves[0] / reserves[1]
+	}
+
+	async getPriceOfMOONUSDT() {
+		let cow = config.cows.find((t) => t.id == "13");
+		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, cow.bscswap)
+		let reserves = await this.contract.methods.getReserves().call();
+		return reserves[0] / reserves[1]
+	}
+
 	async getPriceOfBHCBNB() {
-		let cow = config.cows.find((t) => t.id == "4");
+		let cow = config.cows.find((t) => t.id == "17");
 		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, cow.bscswap)
 		let reserves = await this.contract.methods.getReserves().call();
 		return reserves[1] / reserves[0]
 	}
 
 	async getPriceOfEARTHBNB() {
-		let cow = config.cows.find((t) => t.id == "5");
+		let cow = config.cows.find((t) => t.id == "18");
 		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, cow.bscswap)
 		let reserves = await this.contract.methods.getReserves().call();
 		return reserves[1] / reserves[0]
 	}
 
 	async getPriceOfDEGENBNB() {
-		let cow = config.cows.find((t) => t.id == "7");
+		let cow = config.cows.find((t) => t.id == "20");
 		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, cow.bscswap)
 		let reserves = await this.contract.methods.getReserves().call();
 		return reserves[1] / reserves[0]

@@ -17,7 +17,7 @@
             <h5 class="card-title">{{ rewards }}</h5>
             <p class="card-text">{{$t('cow.earned', {symbol: cow.yieldToken.symbol})}}</p>
             <b-button block @click="onClaim" variant="success">
-             {{$t('cow.harvest')}}
+             {{$t('cow.harvest', {symbol: cow.yieldToken.symbol})}}
             </b-button>
           </div>
         </div>
@@ -32,7 +32,7 @@
               {{$t('cow.approve-symbol', {symbol: cow.stakeToken.symbol})}}
             </b-button>
             <b-button block v-else @click="$bvModal.show('stake-modal')" variant="primary">
-              {{$t('cow.stake')}}
+              {{$t('cow.stake', {symbol: cow.stakeToken.symbol})}}
             </b-button>
           </div>
         </div>
@@ -41,8 +41,11 @@
     <br>
     <div class="row">
       <div class="col-12 text-center">
+        <b-button @click="$bvModal.show('unstake-modal')" variant="primary">
+          {{$t('cow.unstake', {symbol: cow.stakeToken.symbol})}}
+        </b-button>
         <b-button @click="onExit" variant="primary">
-          {{$t('cow.harvest-unstake')}}
+          {{$t('cow.harvest-unstake', {symbol: cow.stakeToken.symbol, symbol2: cow.yieldToken.symbol})}}
         </b-button>
       </div>
     </div>
@@ -50,7 +53,7 @@
 
     <b-modal id="stake-modal" hide-footer size="md">
       <template v-slot:modal-title="{ close }">
-        <b>{{$t('cow.stake')}}</b>
+        <b>{{$t('cow.stake', {symbol: cow.stakeToken.symbol})}}</b>
       </template>
       <b-form>
         <div>{{$t('cow.balance')}}<b class="balance" @click="fillStakeAmount(stakeWalletBalance)">{{ stakeWalletBalance }}</b> {{ cow.stakeToken.symbol}}</div>
@@ -67,7 +70,7 @@
           </b-form-invalid-feedback>
         </b-form-group>
 
-        <b-button block @click="onStake" variant="success" v-if="stakeAllowance.gte(toBigNumber(stakeAmount))" :disabled="!validationAmount(stakeAmount) || txStatus == 'pending' || toBigNumber(stakeWalletBalance).lte(0)" >{{$t('cow.stake')}}</b-button>
+        <b-button block @click="onStake" variant="success" v-if="stakeAllowance.gte(toBigNumber(stakeAmount))" :disabled="!validationAmount(stakeAmount) || txStatus == 'pending' || toBigNumber(stakeWalletBalance).lte(0)" >{{$t('cow.stake', {symbol: cow.stakeToken.symbol})}}</b-button>
       </b-form>
       <br>
       <br>
@@ -75,10 +78,10 @@
 
     <b-modal id="unstake-modal" hide-footer size="md">
       <template v-slot:modal-title="{ close }">
-        <b>{{$t('cow.unstake')}}</b>
+        <b>{{$t('cow.unstake', {symbol: cow.stakeToken.symbol})}}</b>
       </template>
       <b-form>
-        <div>{{$t('cow.staking-balance', {stakingBalance: stakingBalance, symbol: cow.stakeToken.symbol})}}</div>
+        <div>{{$t('cow.staking-balance')}}<b class="balance" @click="fillStakeAmount(stakingBalance)">{{ stakingBalance }}</b> {{ cow.stakeToken.symbol}}</div>
         <b-form-group id="input-group-1" label="" label-for="input-1">
           <b-form-input
             id="input-1"
@@ -91,7 +94,7 @@
             {{$t('cow.amount-greater-than')}}
           </b-form-invalid-feedback>
         </b-form-group>
-        <b-button block @click="onUnstake" variant="success" :disabled="!validationAmount(unstakeAmount) || txStatus == 'pending'">{{$t('cow.unstake')}}</b-button>
+        <b-button block @click="onUnstake" variant="success" :disabled="!validationAmount(unstakeAmount) || txStatus == 'pending'">{{$t('cow.unstake', {symbol: cow.stakeToken.symbol})}}</b-button>
       </b-form>
       <br>
       <br>

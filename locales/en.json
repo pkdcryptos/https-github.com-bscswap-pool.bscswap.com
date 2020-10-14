@@ -12,10 +12,10 @@
     "home": {
         "note": "The Contract is no audited but open source, Please use at your own risk.",
         "protocol-name": "DegenSwap LaunchField",
-        "protocol-desc": "Chef Degen is ready to serve new Yield Farming tokens, are you ready to stake?",
+        "protocol-desc": "If you have staked $DEGEN, $RABBIT, $MOON, $EARTH, $BHC on BurnPool before Oct 11., Please restake them on REFUND POOL!",
         "coming-soon": "Coming soon",
         "select": "Select",
-        "card-desc": "Stake {symbol}(BEP20)"
+        "card-desc": "Stake {symbol}"
     },
     "about": {
         "title": "DEGEN Protocol",
@@ -42,15 +42,16 @@
     },
     "cow": {
         "earned": "{symbol} earned",
-        "harvest": "Harvest",
+        "harvest": "Harvest {symbol}",
         "symbol-staked": "{symbol} staked",
         "approve-symbol": "Approve {symbol}",
-        "stake": "Stake",
-        "harvest-unstake": "Harvest & Unstake",
+        "stake": "Stake {symbol}",
+        "unstake": "Unstake {symbol}",
+        "harvest-unstake": "Harvest {symbol2} & Unstake {symbol}",
         "balance": "Balance: ",
         "greater-than": "Must be greater than 0",
-        "unstake": "Unstake",
-        "staking-balance": "Your staking balance: {stakingBalance} {symbol}",
+        "unstake": "Unstake {symbol}",
+        "staking-balance": "Your staking balance: ",
         "amount-greater-than": "Amount must be great than 0",
         "total": "Total",
         "staking": "is staking"

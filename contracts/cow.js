@@ -44,7 +44,7 @@ export class Cow {
 		let weiAmount = BigNumber(amount).times(this.stakePrecision);
 		var gasPrice = await this.gasPrice();
 	  var tx = this.contract.methods.stake(toBN(weiAmount));
-	  let gasLimit = 150000;
+	  let gasLimit = 300000;
 	  try {
 	  	gasLimit = await tx.estimateGas({ value: 0, from: sender, to: this.address });
 	  } catch(err) {
@@ -58,12 +58,12 @@ export class Cow {
 
 	async earned(sender) {
 		let earned = await this.contract.methods.earned(sender).call();
-		return BigNumber(earned).div(this.yieldPrecision).toFixed(6, 1);
+		return BigNumber(earned).div(this.yieldPrecision).toFixed(8, 1);
 	}
 
 	async balanceOf(sender) {
 		let balance =  await this.contract.methods.balanceOf(sender).call();
-		return BigNumber(balance).div(this.stakePrecision).toFixed(6, 1);
+		return BigNumber(balance).div(this.stakePrecision).toFixed(8, 1);
 	}
 
 	async periodFinish() {

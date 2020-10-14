@@ -3,6 +3,7 @@ import { toBN, BN, isBN } from 'web3-utils'
 import { MAX_UINT256 } from './constants'
 import { BigNumber } from 'bignumber.js'
 import config from  '~/config'
+BigNumber.set({ ROUNDING_MODE: 1 })
 const ERC20_ABI = require('./abis/erc20.json');
 
 export class Erc20 {
@@ -16,11 +17,11 @@ export class Erc20 {
 		this.decimals = decimals;
 		this.symbol = symbol;
 	}
-	
+
 	async balanceOf(user) {
 		let balance = await this.contractReader.methods.balanceOf(user).call();
 		let precision = await this.getPrecision()
-		return new BigNumber(balance).div(precision);
+		return new BigNumber(balance).div(precision).toFixed(8, 1);
 	}
 
 	async getPrecision() {

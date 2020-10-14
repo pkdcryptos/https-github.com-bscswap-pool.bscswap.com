@@ -2,22 +2,22 @@
 export default {
   mode: 'spa',
   head: {
-    title: "First yield farm on Binance Smart Chain.",
+    title: "DegenSwap LaunchField",
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: "Let's get milked" },
-      { hid: 'keywords', name: 'keywords', content: 'Dapp, DeFi, Staking, Token, MILK' },
-      { name: 'twitter:title', content: 'StakeCow.com' },
-      { name: 'twitter:description', content: "Let's get milked" },
-      { name: 'twitter:image', content: '/cow.png' },
+      { hid: 'description', name: 'description', content: "Decentralized Exchange of the Degens, by the Degens, for the Degens." },
+      { hid: 'keywords', name: 'keywords', content: 'Dapp, DeFi, Staking, Token, DEGEN' },
+      { name: 'twitter:title', content: 'pool.degenswap.io' },
+      { name: 'twitter:description', content: "Decentralized Exchange of the Degens, by the Degens, for the Degens." },
+      { name: 'twitter:image', content: '/logo.png' },
       { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:creator', content: '@StakeCow' }
+      { name: 'twitter:creator', content: '@BSCswapProtocol' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'apple-touch-icon', href: '/cow.png' },
-      { rel: 'shortcut icon', href: '/cow.png' }
+      { rel: 'icon', type: 'image/x-icon', href: '/logo.png' },
+      { rel: 'apple-touch-icon', href: '/logo.png' },
+      { rel: 'shortcut icon', href: '/logo.png' }
     ]
   },
 

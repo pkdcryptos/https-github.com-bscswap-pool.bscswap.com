@@ -2,6 +2,7 @@ import Web3 from 'web3'
 import { toBN, BN, isBN } from 'web3-utils'
 import { MAX_UINT256 } from './constants'
 import { BigNumber } from 'bignumber.js'
+BigNumber.set({ ROUNDING_MODE: 1 })
 
 const WBNB_ABI = require('./abis/wbnb.json');
 
@@ -14,11 +15,11 @@ export class Wbnb {
 		this.symbol = symbol;
 		this.defaultGasPrice = 20000000000;
 	}
-	
+
 	async balanceOf(user) {
 		let balance = await this.contract.methods.balanceOf(user).call();
 		let precision = await this.getPrecision()
-		return new BigNumber(balance).div(precision);
+		return new BigNumber(balance).div(precision).toFixed(8, 1);
 	}
 
 	async getPrecision() {

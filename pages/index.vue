@@ -1,11 +1,6 @@
 <template>
   <div>
     <div>
-      <p>
-        <div class="alert alert-danger" role="alert">
-          {{$t("home.note")}}
-        </div>
-      </p>
       <div class="intro">
         <h3>
           {{$t("home.protocol-name")}}
@@ -18,35 +13,28 @@
     </div>
     <br>
     <div class="price alert alert-success">
-      1 $MILK = {{ priceMILKUSDT ? priceMILKUSDT.toFixed(4) : '--' }} $USDT = {{ priceMILKBNB ? priceMILKBNB.toFixed(4) : '--' }} $BNB
+      1 $BSWAP = {{ priceBSWAPUSDT ? priceBSWAPUSDT.toFixed(4) : '--' }} $USDT /
+      1 $DEGEN = {{ priceDEGENBUSD ? priceDEGENBUSD.toFixed(4) : '--' }} $BUSD /
+      0.00001 $RABBIT = {{ priceRABBITUSDT ? priceRABBITUSDT.div(100000).toFixed(4) : '--' }} $USDT /
+      0.00001 $MOON = {{ priceMOONUSDT ? priceMOONUSDT.div(100000).toFixed(4) : '--' }} $USDT /
+      0.00001 $EARTH = {{ priceEARTHBUSD ? priceEARTHBUSD.div(100000).toFixed(4) : '--' }} $BUSD /
+      1 $BHC = {{ priceBHCBUSD ? priceBHCBUSD.toFixed(4) : '--' }} $BUSD
     </div>
 
     <br>
     <div class="row">
-      <div class="col-6 cow" v-for="(cow, i) in cows" :key="i">
+      <div class="col-4 cow" v-for="(cow, i) in cows" :key="i">
         <div class="card cow">
-          <span class="avatar">{{cow.avatar}}</span>
           <div class="card-body">
-            <h5 class="card-title title">{{ cow.name }}</h5>
+            <img :src="cow.image" class="tokenlogo">
+            <h8 class="card-title title">{{ cow.name }}</h8>
+            <!-- <div class="desc">{{ cow.stakeToken.symbol }}</div> -->
             <div class="desc">{{$t("home.card-desc", { symbol: cow.stakeToken.symbol })}}</div>
             <p class="card-text apy"> APY: {{apy[cow.id]}}% </p>
-            <a :href="'/cow/' + cow.id" v-if="cow.initialized" class="btn btn-block btn-success">
+            <a :href="'/pool/' + cow.id" v-if="cow.initialized" class="btn btn-block btn-success">
               {{$t("home.select")}}
             </a>
             <a href="#" v-else class="btn btn-secondary btn-block">{{$t("home.coming-soon")}}</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 cow">
-        <div class="card cow">
-          <span class="avatar">{{hybirdCow.avatar}}</span>
-          <div class="card-body">
-            <h5 class="card-title title">{{ hybirdCow.name }}</h5>
-            <div class="desc">{{$t("home.card-desc", { symbol: hybirdCow.stakeToken.symbol })}}</div>
-            <p class="card-text apy"> APY: {{hybirdCowAPY}}% </p>
-            <a :href="'/cow/hybird'" v-if="hybirdCow.initialized" class="btn btn-block btn-success">
-              {{$t("home.select")}}
-            </a>
           </div>
         </div>
       </div>
@@ -57,51 +45,66 @@
 
 <script>
   import config from '~/config'
-  import { Pair, Oracle, Erc20Reader, CowReader, CREAM_BNB, CrBNB } from '~/contracts'
+  import { Pair, Erc20Reader, CowReader } from '~/contracts'
   import { BigNumber } from 'bignumber.js'
 
   export default {
     data () {
       return {
         cows: config.cows,
-        priceMILKUSDT: null,
-        priceMILKBNB: null,
-        hybirdCow: config.hybird,
-        hybirdCowAPY: '--',
+        priceDEGENBUSD: null,
+        priceDEGENBNB: null,
+        priceBHCBUSD: null,
+        priceBHCBNB: null,
+        priceEARTHBUSD: null,
+        priceEARTHBNB: null,
+        priceRABBITUSDT: null,
+        priceMOONUSDT: null,
+        priceBSWAPUSDT: null,
         apy: {
           1: '--',
           2: '--',
           3: '--',
-          4: '--'
+          4: '--',
+          5: '--',
+          6: '--',
+          7: '--',
+          8: '--',
+          9: '--',
+          10: '--',
+          11: '--',
+          12: '--',
+          13: '--',
+          14: '--',
+          15: '--',
+          16: '--',
+          17: '--',
+          18: '--',
+          19: '--',
+          20: '--',
+          21: '--'
         }
       }
     },
     methods: {
-      
+
     },
     async mounted() {
-      // try{
-      //   await this.$onConnect();
-      // } catch {
-
-      // }
-      let oracle = new Oracle()
       let pair = new Pair()
-      let promises = [ oracle.getPriceOfBNBUSDT(), pair.getPrice(), oracle.getPriceOfDOTBNB() ];
+      let promises = [ pair.getPriceOfBNBBUSD(), pair.getPriceOfDEGENBNB(), pair.getPriceOfBHCBNB(), pair.getPriceOfEARTHBNB(), pair.getPriceOfBUSDBNB(), pair.getPriceOfMOONUSDT(), pair.getPriceOfRABBITUSDT(), pair.getPriceOfBSWAPUSDT() ];
       let prices = await Promise.all(promises);
-      
-      this.priceBNBUSDT =  prices[0];
-      this.priceMILKUSDT = BigNumber(prices[0]).times(BigNumber(prices[1]))
-      this.priceMILKBNB =  BigNumber(prices[1]);
-      this.priceDOTBNB = prices[2];
 
-      let hybirdCowReader = new CowReader(this.hybirdCow.address, this.hybirdCow.stakeToken, this.hybirdCow.yieldToken)
-
-      let crBNB = new CrBNB(CREAM_BNB);
-      let apy = await crBNB.APY();
-      let total = await hybirdCowReader.totalSupply();
-      let rate = await hybirdCowReader.rewardRate();
-      this.hybirdCowAPY = rate.times(365 * 24 * 60 * 60).div(total).plus(apy).times(100).toFixed(2);
+      this.priceDEGENBUSD = BigNumber(prices[0]).times(BigNumber(prices[1]));
+      this.priceDEGENBNB =  BigNumber(prices[1]);
+      this.priceBHCBUSD = BigNumber(prices[0]).times(BigNumber(prices[2]));
+      this.priceBHCBNB =  BigNumber(prices[2]);
+      this.priceEARTHBUSD = BigNumber(prices[0]).times(BigNumber(prices[3]));
+      this.priceEARTHBNB =  BigNumber(prices[3]);
+      this.priceMOONUSDT =  BigNumber(prices[5]);
+      this.priceRABBITUSDT = BigNumber(prices[6]);
+      this.priceBSWAPUSDT = BigNumber(prices[7]);
+      this.priceBUSDBNB = BigNumber(prices[4]);
+      this.priceBNBBUSD = BigNumber(prices[0]);
 
       this.cows.map(async(cow) => {
         if(cow.initialized) {
@@ -114,9 +117,45 @@
           if(cow.id == 1) {
             this.apy[1] = rewards.times(100).toFixed(2)
           } else if(cow.id == 2) {
-            this.apy[2] = rewards.times(this.priceMILKBNB).div(this.priceDOTBNB).times(100).toFixed(2)
+            this.apy[2] = rewards.times(this.priceBSWAPUSDT).div(this.priceDEGENBUSD.plus(1)).times(50).toFixed(2)
           } else if(cow.id == 3) {
-            this.apy[3] = new BigNumber(0)
+            this.apy[3] = rewards.times(this.priceBSWAPUSDT).div(this.priceBHCBUSD.plus(1)).times(50).toFixed(2)
+          } else if(cow.id == 4) {
+            this.apy[4] = rewards.times(this.priceBSWAPUSDT).div(this.priceEARTHBUSD.plus(1)).times(50).toFixed(2)
+          } else if(cow.id == 5) {
+            this.apy[5] = rewards.times(this.priceBSWAPUSDT).div(this.priceMOONUSDT.plus(1)).times(50).toFixed(2)
+          } else if(cow.id == 6) {
+            this.apy[6] = rewards.times(this.priceBSWAPUSDT).div(this.priceRABBITUSDT.plus(1)).times(50).toFixed(2)
+          } else if(cow.id == 7) {
+            this.apy[7] = rewards.times(this.priceBSWAPUSDT).div(this.priceDEGENBUSD.plus(1)).times(50).toFixed(2)
+          } else if(cow.id == 8) {
+            this.apy[8] = rewards.times(this.priceBSWAPUSDT).div(this.priceBHCBUSD.plus(1)).times(50).toFixed(2)
+          } else if(cow.id == 9) {
+            this.apy[9] = rewards.times(this.priceBSWAPUSDT).div(this.priceEARTHBUSD.plus(1)).times(50).toFixed(2)
+          } else if(cow.id == 10) {
+            this.apy[10] = rewards.times(this.priceBSWAPUSDT).div(this.priceMOONUSDT.plus(1)).times(50).toFixed(2)
+          } else if(cow.id == 11) {
+            this.apy[11] = rewards.times(this.priceBSWAPUSDT).div(this.priceRABBITUSDT.plus(1)).times(50).toFixed(2)
+          } else if(cow.id == 12) {
+            this.apy[12] = rewards.times(this.priceMOONUSDT).times(100).toFixed(2)
+          } else if(cow.id == 13) {
+            this.apy[13] = rewards.times(this.priceEARTHBUSD).times(100).toFixed(2)
+          } else if(cow.id == 14) {
+            this.apy[14] = rewards.times(this.priceMOONUSDT).div(10).toFixed(2)
+          } else if(cow.id == 15) {
+            this.apy[15] = rewards.times(this.priceMOONUSDT).div(this.priceEARTHBUSD.plus(1)).times(100).toFixed(2)
+          } else if(cow.id == 16) {
+            this.apy[16] = rewards.times(this.priceMOONUSDT).div(this.priceBNBBUSD.plus(1)).times(100).toFixed(2)
+          } else if(cow.id == 17) {
+            this.apy[17] = rewards.times(this.priceBHCBNB).div(this.priceDEGENBNB.plus(1)).times(100).toFixed(2)
+          } else if(cow.id == 18) {
+            this.apy[18] = rewards.times(this.priceBHCBNB).div(this.priceBHCBNB.plus(1)).times(100).toFixed(2)
+          } else if(cow.id == 19) {
+            this.apy[19] = rewards.times(this.priceBHCBNB).div(this.priceEARTHBNB.plus(1)).times(100).toFixed(2)
+          } else if(cow.id == 20) {
+            this.apy[20] = rewards.times(this.priceBHCBNB).div(this.priceBUSDBNB.plus(1)).times(100).toFixed(2)
+          } else if(cow.id == 21) {
+            this.apy[21] = rewards.times(this.priceDEGENBNB).div(this.priceDEGENBNB.plus(1)).times(100).toFixed(2)
           }
         }
         return cow
@@ -141,9 +180,12 @@
     font-size: 0.9rem;
     color: #999;
   }
+  .tokenlogo {
+    width: 50px;
+  }
   .cover img {
     display: inline-block;
-    width: 150px;
+    width: 50px;
     text-align: center;
   }
   .cow {

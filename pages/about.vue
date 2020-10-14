@@ -96,7 +96,7 @@
   }
   .cover img {
     display: inline-block;
-    width: 150px;
+    width: 50px;
     text-align: center;
   }
   .cow img {

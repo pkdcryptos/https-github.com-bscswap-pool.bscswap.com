@@ -1,4 +1,4 @@
-# StakeCow App
+# DegenSwap App
 
 When cow comes, everyone wants to get milked. The Milk Protocol is designed to yield MILK for those who want to get milked. Stake tokens on Cow, got MILK for free.
 

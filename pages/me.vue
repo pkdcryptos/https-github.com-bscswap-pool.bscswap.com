@@ -30,7 +30,7 @@
 
 <script>
   import utils from '~/mixins/utils'
-  import { Erc20Reader, LockPool, CowHero } from '~/contracts'
+  import { Erc20Reader } from '~/contracts'
   import { toBN, BN, isBN } from 'web3-utils'
   import { BigNumber } from 'bignumber.js'
   import config from '~/config'
@@ -66,12 +66,10 @@
       }
     },
     async mounted() {
-      
+
       let erc20Reader = new Erc20Reader(config.milk.address, config.milk.symbol, config.milk.decimals);
-      let cowHero = new CowHero(config.cowHero);
       let account = this.$store.state.connectedAccount;
       this.balance = await erc20Reader.balanceOf(account);
-      this.nftBalance = (await cowHero.balanceOf(account)).toNumber();
     }
   }
 </script>

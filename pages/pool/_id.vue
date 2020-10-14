@@ -2,12 +2,11 @@
   <div>
     <div class="row">
       <div class="col-12 text-center">
-        <span class="avatar">{{cow.avatar}}</span>
+        <img :src="cow.image" class="tokenlogo">
         <div class="name">{{cow.name}}</div>
-        <div v-if="cow.id == 3">stopped producing $MILK at {{ new Date(1602513000 * 1000) }} </div>
-        <div class="desc" v-if="cow.id != 3">{{cow.desc}}</div>
+        <div class="desc">{{cow.desc}}</div>
         <br>
-        <div>{{$t('cow.total')}} <b>{{ stakingTotal.toFixed(6, 1) }}</b> {{ cow.stakeToken.symbol }} {{$t('cow.staking')}}</div>
+        <div>{{$t('cow.total')}} <b>{{ stakingTotal }}</b> {{ cow.stakeToken.symbol }} {{$t('cow.staking')}}</div>
       </div>
     </div>
     <br>
@@ -15,10 +14,10 @@
       <div class="col-6">
         <div class="card text-center">
           <div class="card-body">
-            <h5 class="card-title">{{ rewards.toFixed(6, 1) }}</h5>
-            <p class="card-text">{{$t('cow.earned')}}</p>
+            <h5 class="card-title">{{ rewards }}</h5>
+            <p class="card-text">{{$t('cow.earned', {symbol: cow.yieldToken.symbol})}}</p>
             <b-button block @click="onClaim" variant="success">
-             {{$t('cow.harvest')}}
+             {{$t('cow.harvest', {symbol: cow.yieldToken.symbol})}}
             </b-button>
           </div>
         </div>
@@ -29,11 +28,11 @@
             <h5 class="card-title">{{ stakingBalance }} </h5>
             <p class="card-text">{{$t('cow.symbol-staked', {symbol: cow.stakeToken.symbol})}}</p>
             <b-button block @click="onApprove" v-if="stakeAllowance.lte(toBigNumber(stakeAmount))" variant="danger" :disabled="btnApproving">
-              <b-spinner small label="Loading..." v-if="btnApproving"></b-spinner> 
+              <b-spinner small label="Loading..." v-if="btnApproving"></b-spinner>
               {{$t('cow.approve-symbol', {symbol: cow.stakeToken.symbol})}}
-            </b-button>
+            </b-button>s
             <b-button block v-else @click="$bvModal.show('stake-modal')" variant="primary">
-              {{$t('cow.stake')}}
+              {{$t('cow.stake', {symbol: cow.stakeToken.symbol})}}
             </b-button>
           </div>
         </div>
@@ -42,8 +41,11 @@
     <br>
     <div class="row">
       <div class="col-12 text-center">
+        <b-button @click="$bvModal.show('unstake-modal')" variant="primary">
+          {{$t('cow.unstake', {symbol: cow.stakeToken.symbol})}}
+        </b-button>
         <b-button @click="onExit" variant="primary">
-          {{$t('cow.exit')}}
+          {{$t('cow.harvest-unstake', {symbol: cow.stakeToken.symbol, symbol2: cow.yieldToken.symbol})}}
         </b-button>
       </div>
     </div>
@@ -51,10 +53,10 @@
 
     <b-modal id="stake-modal" hide-footer size="md">
       <template v-slot:modal-title="{ close }">
-        <b>{{$t('cow.stake')}}</b>
+        <b>{{$t('cow.stake', {symbol: cow.stakeToken.symbol})}}</b>
       </template>
       <b-form>
-        <div>{{$t('cow.balance')}}<b class="balance" @click="fillStakeAmount(userStakeWalletBalance)">{{ userStakeWalletBalance }}</b> {{ cow.stakeToken.symbol}}</div>
+        <div>{{$t('cow.balance')}}<b class="balance" @click="fillStakeAmount(stakeWalletBalance)">{{ stakeWalletBalance }}</b> {{ cow.stakeToken.symbol}}</div>
         <b-form-group id="input-group-1" label="" label-for="input-1">
           <b-form-input
             id="input-1"
@@ -68,7 +70,7 @@
           </b-form-invalid-feedback>
         </b-form-group>
 
-        <b-button block @click="onStake" variant="success" v-if="stakeAllowance.gte(toBigNumber(stakeAmount))" :disabled="!validationAmount(stakeAmount) || txStatus == 'pending' || toBigNumber(stakeWalletBalance).lte(0)" >{{$t('cow.stake')}}</b-button>
+        <b-button block @click="onStake" variant="success" v-if="stakeAllowance.gte(toBigNumber(stakeAmount))" :disabled="!validationAmount(stakeAmount) || txStatus == 'pending' || toBigNumber(stakeWalletBalance).lte(0)" >{{$t('cow.stake', {symbol: cow.stakeToken.symbol})}}</b-button>
       </b-form>
       <br>
       <br>
@@ -76,10 +78,10 @@
 
     <b-modal id="unstake-modal" hide-footer size="md">
       <template v-slot:modal-title="{ close }">
-        <b>{{$t('cow.unstake')}}</b>
+        <b>{{$t('cow.unstake', {symbol: cow.stakeToken.symbol})}}</b>
       </template>
       <b-form>
-        <div>{{$t('cow.staking-balance', {stakingBalance: stakingBalance, symbol: cow.stakeToken.symbol})}}</div>
+        <div>{{$t('cow.staking-balance')}}<b class="balance" @click="fillStakeAmount(stakingBalance)">{{ stakingBalance }}</b> {{ cow.stakeToken.symbol}}</div>
         <b-form-group id="input-group-1" label="" label-for="input-1">
           <b-form-input
             id="input-1"
@@ -92,7 +94,7 @@
             {{$t('cow.amount-greater-than')}}
           </b-form-invalid-feedback>
         </b-form-group>
-        <b-button block @click="onUnstake" variant="success" :disabled="!validationAmount(unstakeAmount) || txStatus == 'pending'">{{$t('cow.unstake')}}</b-button>
+        <b-button block @click="onUnstake" variant="success" :disabled="!validationAmount(unstakeAmount) || txStatus == 'pending'">{{$t('cow.unstake', {symbol: cow.stakeToken.symbol})}}</b-button>
       </b-form>
       <br>
       <br>
@@ -104,7 +106,7 @@
           <b-spinner small label="Loading..." v-if="txStatus == 'pending'"></b-spinner>
           <b-icon icon="check-circle" v-if="txStatus == 'mined'"></b-icon>
           <b-icon icon="x-circle" variant="danger" v-if="txStatus == 'error'"></b-icon>
-          {{ txStatus }} 
+          {{ txStatus }}
         </div>
       </template>
 
@@ -125,8 +127,8 @@
 
   export default {
     asyncData({params}) {
-      let cow = config.cows.find((cow)=>{ 
-        return cow.id == params.id 
+      let cow = config.cows.find((cow)=>{
+        return cow.id == params.id
       });
       return {
         cow: cow,
@@ -136,9 +138,9 @@
         submitDisabled: false,
         titleStatus: '',
         txStatus: 'null',
-        stakeWalletBalance: new BigNumber(0),
+        stakeWalletBalance: '0',
         stakingBalance: '0',
-        rewards: new BigNumber(0),
+        rewards: '0',
         isBalanceLoaded: false,
         stakeAmount: '',
         unstakeAmount: '',
@@ -151,18 +153,10 @@
         initReward: '',
         stakeAllowance: BigNumber(0),
         btnApproving: false,
-        stakingTotal: new BigNumber(0)
+        stakingTotal: '--'
       }
     },
-    computed: {
-      // validationAmount(v) {
-      //   return v && parseFloat(v) > 0
-      // },
-
-      userStakeWalletBalance() {
-        return  this.stakeWalletBalance.toFixed(5, 1);
-      }
-    },
+    computed: {},
     methods: {
       toBigNumber(v) {
         return v ? BigNumber(v) : BigNumber(0)
@@ -341,7 +335,7 @@
   .write-form {
     max-width: 30rem;
   }
-  .connect { 
+  .connect {
     background-color: #e9ecef;
     padding: 1rem;
     margin-bottom: 1rem;
@@ -365,5 +359,8 @@
   }
   .tx-status {
     text-transform: capitalize;
+  }
+  .tokenlogo {
+    width: 150px;
   }
 </style>

@@ -1,8 +1,8 @@
 {
-  "name": "StakeCow",
+  "name": "DegenSwap",
   "version": "1.0.0",
   "description": "Let's get milked",
-  "author": "stakecow",
+  "author": "DegenSwap",
   "private": true,
   "scripts": {
     "dev": "nuxt",

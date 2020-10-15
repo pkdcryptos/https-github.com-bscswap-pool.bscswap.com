@@ -27,14 +27,6 @@ export class Cow {
 		this.web3.setProvider(provider)
 	}
 
-	async stakeTokenAddress() {
-		return this.stakeToken ? this.stakeToken.address : await this.contractReader.methods.depositToken().call();
-	}
-
-	async yieldTokenAddress() {
-		return this.yieldToken ? this.stakeToken.address : await this.contractReader.methods.degenToken().call();
-	}
-
 	async totalSupply() {
 		let supply = await this.contractReader.methods.totalSupply().call();
 		return BigNumber(supply).div(this.yieldPrecision);

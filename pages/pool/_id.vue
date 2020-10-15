@@ -41,10 +41,10 @@
     <br>
     <div class="row">
       <div class="col-12 text-center">
-        <b-button @click="$bvModal.show('unstake-modal')" variant="primary">
+        <b-button @click="$bvModal.show('unstake-modal')" v-if="cow.unstakeable" variant="primary">
           {{$t('cow.unstake', {symbol: cow.stakeToken.symbol})}}
         </b-button>
-        <b-button @click="onExit" variant="primary">
+        <b-button @click="onExit" v-if="cow.unstakeable" variant="primary">
           {{$t('cow.harvest-unstake', {symbol: cow.stakeToken.symbol, symbol2: cow.yieldToken.symbol})}}
         </b-button>
       </div>
@@ -310,7 +310,7 @@
         this.stakeToken = stakeToken;
         this.yieldToken = yieldToken;
       }
-      this.stakingTotal = await stakeToken.balanceOf(this.cow.address);
+      this.stakingTotal = await cow.totalSupply();
     }
   }
 </script>

@@ -111,11 +111,11 @@
           let erc20Reader = new Erc20Reader(cow.stakeToken.address, cow.stakeToken.symbol, cow.stakeToken.decimals)
           let cowReader = new CowReader(cow.address, cow.stakeToken, cow.yieldToken)
           let rewardRate = await cowReader.rewardRate();
-          let balance = await erc20Reader.balanceOf(cow.address);
+          let balance = await cowReader.totalSupply();
           let rewards = rewardRate.times(365 * 24 * 60 * 60).div(balance)
 
           if(cow.id == 1) {
-            this.apy[1] = rewards.times(100).toFixed(2)
+            this.apy[1] = new BigNumber(0)
           } else if(cow.id == 2) {
             this.apy[2] = rewards.times(this.priceBSWAPUSDT).div(this.priceDEGENBUSD.plus(1)).times(50).toFixed(2)
           } else if(cow.id == 3) {

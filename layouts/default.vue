@@ -1,55 +1,44 @@
 <template>
+
+
   <div>
+    <div>
+      <b-navbar toggleable="lg" type="dark" variant="dark" fixed="top">
+        <b-navbar variant="faded" type="light">
+          <b-navbar-brand href="/">
+            <img src="~/static/logo.png" class="d-inline-block align-top logo" alt="LaunchField">
+            LaunchField
+          </b-navbar-brand>
+        </b-navbar>
 
-    <div class="header">
-      <div class="container">
-      <div class="row">
-        <div class="col-md-2 col-sm-5 nav-link text-center">
-          <router-link to="/">
-            <img src="~/static/logo.png" class="logo"/> LaunchField
-          </router-link>
-        </div>
-        <div class="col-md-6 text-center nav-container">
-          <b-nav class="justify-content-center">
-            <b-nav-item>
-              <router-link to="/">
-                {{$t("navbar.home")}}
-              </router-link>
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+        <b-collapse id="nav-collapse" is-nav>
+          <b-navbar-nav class="ml-auto">
+            <b-nav-item href="/">HOME</b-nav-item>
+            <b-nav-item href="https://degenswap.io/#/swap?outputCurrency=0xb37B51C5C4C934468B49b55FeC15e76c9b538fF3">{{$t("navbar.exchange")}}</b-nav-item>
+            <b-nav-item href="https://medium.com/@bscswapprotocol/announcing-degenswap-project-a-new-innovation-zone-for-bscswap-5b3922c16310" >{{$t("navbar.about")}}</b-nav-item>
+          </b-navbar-nav>
+
+          <!-- Right aligned nav items -->
+          <b-navbar-nav class="ml-auto">
+            <b-nav-item right>
+              <div class="wallet" v-if="walletInstalled">
+                <span v-if="checkChainId">
+                  <span class="addr" v-if="$store.state.connectedAccount">
+                    <b-icon-wallet></b-icon-wallet>
+                    {{ shortAddr($store.state.connectedAccount) }}
+                  </span>
+                  </router-link>
+                </span>
+                <a href="https://docs.binance.org/smart-chain/wallet/metamask.html" target="_blank" v-else>{{$t("navbar.change-to-bsc")}}</a>
+              </div>
             </b-nav-item>
-
-            <li class="nav-item">
-              <a href="https://degenswap.io/#/swap?outputCurrency=0xb37B51C5C4C934468B49b55FeC15e76c9b538fF3" class="nav-link">
-                {{$t("navbar.exchange")}}
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="https://medium.com/@bscswapprotocol/announcing-degenswap-project-a-new-innovation-zone-for-bscswap-5b3922c16310" class="nav-link">
-                {{$t("navbar.about")}}
-              </a>
-            </li>
-        </div>
-        <div class="col-md-4 col-sm-5 text-right nav-link right">
-          <div class="wallet" v-if="walletInstalled">
-            <span v-if="checkChainId">
-              <router-link to="/me">
-              <span class="addr" v-if="$store.state.connectedAccount">
-                <b-icon-wallet></b-icon-wallet>
-                {{ shortAddr($store.state.connectedAccount) }}
-              </span>
-              </router-link>
-            </span>
-            <a href="https://docs.binance.org/smart-chain/wallet/metamask.html" target="_blank" v-else>{{$t("navbar.change-to-bsc")}}</a>
-          </div>
-          <div v-else><a href="https://metamask.io/" target="_blank">{{$t("navbar.install-wallet")}}</a></div>
-          <b-dropdown class="dropdown" :text="currentLang == 'en' ? language.en : language.zh_CN">
-              <b-dropdown-item @click="checkLanguage('en')" :active="currentLang == 'en'">{{language.en}}</b-dropdown-item>
-              <b-dropdown-item @click="checkLanguage('zh_CN')" :active="currentLang == 'zh_CN'">{{language.zh_CN}}</b-dropdown-item>
-          </b-dropdown>
-        </div>
-      </div>
-      </div>
+          </b-navbar-nav>
+        </b-collapse>
+      </b-navbar>
     </div>
+
 
     <div class="container main">
       <b-row>
@@ -130,8 +119,7 @@
     margin-bottom: 2rem;
     color: #fff;
   }
-  .header a {
-    color: #fff;
+  .nav-item a {
     font-size: 1.1rem;
   }
   .nav-container{
@@ -147,8 +135,13 @@
     padding: 0;
     height: 32px;
   }
+  .addr{
+    color: #fff;
+    font-size: 1.1rem;
+  }
   .main {
     min-height: calc(100vh - 80px);
+    padding-top: 100px;
   }
 
   .footer {

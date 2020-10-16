@@ -23,15 +23,15 @@
 
     <br>
     <div class="row">
-      <div class="col-4 cow" v-for="(cow, i) in cows" :key="i">
-        <div class="card cow">
+      <div class="col-md-4 cow" v-for="(cow, i) in cows" :key="i">
+        <div class="card mb-4 text-white bg-dark cow">
           <div class="card-body">
             <img :src="cow.image" class="tokenlogo">
             <h8 class="card-title title">{{ cow.name }}</h8>
             <!-- <div class="desc">{{ cow.stakeToken.symbol }}</div> -->
             <div class="desc">{{$t("home.card-desc", { symbol: cow.stakeToken.symbol })}}</div>
             <p class="card-text apy"> APY: {{apy[cow.id]}}% </p>
-            <a :href="'/pool/' + cow.id" v-if="cow.initialized" class="btn btn-block btn-success">
+            <a :href="'/pool/' + cow.id" v-if="cow.initialized" class="btn btn-block btn-warning">
               {{$t("home.select")}}
             </a>
             <a href="#" v-else class="btn btn-secondary btn-block">{{$t("home.coming-soon")}}</a>
@@ -180,8 +180,18 @@
     font-size: 0.9rem;
     color: #999;
   }
-  .tokenlogo {
-    width: 50px;
+  @media (max-width:767px){
+    .col-md-4.cow {
+      width: 100%;
+    }
+    .cow.card img.tokenlogo{
+      max-width: 100px;
+    }
+  }
+  .cow.card img.tokenlogo {
+    display:block;
+    margin: 0 auto;
+    max-width:150px;
   }
   .cover img {
     display: inline-block;
@@ -208,4 +218,5 @@
     font-size: 0.9rem;
     color: #007bff;
   }
+
 </style>

@@ -12,43 +12,43 @@ export class Pair {
 	}
 
 	async getPriceOfBSWAPUSDT() {
-		let cow = config.cows.find((t) => t.id == "2");
-		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, cow.bscswap)
+		this.address = config.pair_BSWAP_USDT;
+		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, this.address)
 		let reserves = await this.contract.methods.getReserves().call();
 		return reserves[0] / reserves[1]
 	}
 
 	async getPriceOfRABBITUSDT() {
-		let cow = config.cows.find((t) => t.id == "6");
-		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, cow.bscswap)
+		this.address = config.pair_RABBIT_USDT;
+		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, this.address)
 		let reserves = await this.contract.methods.getReserves().call();
 		return reserves[0] / reserves[1]
 	}
 
 	async getPriceOfMOONUSDT() {
-		let cow = config.cows.find((t) => t.id == "14");
-		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, cow.bscswap)
+		this.address = config.pair_MOON_USDT;
+		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, this.address)
 		let reserves = await this.contract.methods.getReserves().call();
 		return reserves[0] / reserves[1]
 	}
 
 	async getPriceOfBHCBNB() {
-		let cow = config.cows.find((t) => t.id == "18");
-		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, cow.bscswap)
+		this.address = config.pair_BHC_BNB;
+		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, this.address)
 		let reserves = await this.contract.methods.getReserves().call();
 		return reserves[1] / reserves[0]
 	}
 
 	async getPriceOfEARTHBNB() {
-		let cow = config.cows.find((t) => t.id == "19");
-		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, cow.bscswap)
+		this.address = config.pair_EARTH_BNB;
+		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, this.address)
 		let reserves = await this.contract.methods.getReserves().call();
 		return reserves[1] / reserves[0]
 	}
 
 	async getPriceOfDEGENBNB() {
-		let cow = config.cows.find((t) => t.id == "21");
-		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, cow.bscswap)
+		this.address = config.pair_DEGEN_BNB;
+		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, this.address)
 		let reserves = await this.contract.methods.getReserves().call();
 		return reserves[1] / reserves[0]
 	}

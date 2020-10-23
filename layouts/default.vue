@@ -15,9 +15,9 @@
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav class="ml-auto">
-            <b-nav-item href="/">HOME</b-nav-item>
-            <b-nav-item href="https://degenswap.io/#/swap?outputCurrency=0xb37B51C5C4C934468B49b55FeC15e76c9b538fF3">{{$t("navbar.exchange")}}</b-nav-item>
-            <b-nav-item href="https://medium.com/@bscswapprotocol/announcing-degenswap-project-a-new-innovation-zone-for-bscswap-5b3922c16310" >{{$t("navbar.about")}}</b-nav-item>
+            <b-nav-item href="/">Home</b-nav-item>
+            <b-nav-item href="https://bscswap.com">{{$t("navbar.exchange")}}</b-nav-item>
+            <b-nav-item href="https://bscswapprotocol.medium.com/announcing-the-launchfield-program-and-the-yield-farming-offering-for-bhc-and-earth-token-dae6444393a8" >{{$t("navbar.about")}}</b-nav-item>
           </b-navbar-nav>
 
           <!-- Right aligned nav items -->

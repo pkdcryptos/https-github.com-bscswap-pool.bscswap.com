@@ -1,8 +1,8 @@
 {
-  "name": "DegenSwap",
+  "name": "BSCswap",
   "version": "1.0.0",
   "description": "Let's get milked",
-  "author": "DegenSwap",
+  "author": "BSCswap",
   "private": true,
   "scripts": {
     "dev": "nuxt",

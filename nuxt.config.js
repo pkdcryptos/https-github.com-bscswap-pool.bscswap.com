@@ -2,13 +2,13 @@
 export default {
   mode: 'spa',
   head: {
-    title: "DegenSwap LaunchField",
+    title: "BSCswap LaunchField",
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: "Decentralized Exchange of the Degens, by the Degens, for the Degens." },
       { hid: 'keywords', name: 'keywords', content: 'Dapp, DeFi, Staking, Token, DEGEN' },
-      { name: 'twitter:title', content: 'pool.degenswap.io' },
+      { name: 'twitter:title', content: 'pool.bscswap.com' },
       { name: 'twitter:description', content: "Decentralized Exchange of the Degens, by the Degens, for the Degens." },
       { name: 'twitter:image', content: '/logo.png' },
       { name: 'twitter:card', content: 'summary_large_image' },

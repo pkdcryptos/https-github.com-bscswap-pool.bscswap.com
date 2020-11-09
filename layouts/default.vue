@@ -16,8 +16,9 @@
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav class="ml-auto">
             <b-nav-item href="/">Home</b-nav-item>
-            <b-nav-item href="https://bscswap.com">{{$t("navbar.exchange")}}</b-nav-item>
-            <b-nav-item href="https://bscswapprotocol.medium.com/announcing-the-launchfield-program-and-the-yield-farming-offering-for-bhc-and-earth-token-dae6444393a8" >{{$t("navbar.about")}}</b-nav-item>
+            <b-nav-item href="https://bscswap.com" target="_blank">{{$t("navbar.exchange")}}</b-nav-item>
+            <b-nav-item href="https://stable.bscswap.com/deposit.html" target="_blank">Wrap BAI</b-nav-item>
+            <b-nav-item href="https://bscswapprotocol.medium.com/announcing-the-launchfield-program-and-the-yield-farming-offering-for-bhc-and-earth-token-dae6444393a8" target="_blank">{{$t("navbar.about")}}</b-nav-item>
           </b-navbar-nav>
 
           <!-- Right aligned nav items -->

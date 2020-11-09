@@ -67,6 +67,34 @@ export class Pair {
 		return reserves[1] / reserves[0]
 	}
 
+	async getPriceOfCAKEBNB() {
+		this.address = config.pair_CAKE_BNB;
+		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, this.address)
+		let reserves = await this.contract.methods.getReserves().call();
+		return reserves[1] / reserves[0]
+	}
+
+	async getPriceOfBURGERBNB() {
+		this.address = config.pair_BURGER_BNB;
+		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, this.address)
+		let reserves = await this.contract.methods.getReserves().call();
+		return reserves[1] / reserves[0]
+	}
+
+	async getPriceOfTHUGSBNB() {
+		this.address = config.pair_THUGS_BNB;
+		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, this.address)
+		let reserves = await this.contract.methods.getReserves().call();
+		return reserves[0] / reserves[1]
+	}
+
+	async getPriceOfDRUGSBNB() {
+		this.address = config.pair_DRUGS_BNB;
+		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, this.address)
+		let reserves = await this.contract.methods.getReserves().call();
+		return reserves[0] / reserves[1]
+	}
+
 	async totalSupply() {
 		return await this.contract.methods.totalSupply().call();
 	}

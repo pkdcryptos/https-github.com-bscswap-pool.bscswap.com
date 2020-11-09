@@ -16,7 +16,10 @@
           <div class="card-body">
             <h5 class="card-title">{{ rewards }}</h5>
             <p class="card-text">{{$t('cow.earned', {symbol: cow.yieldToken.symbol})}}</p>
-            <b-button block @click="onClaim" variant="success">
+            <b-button block v-if="cow.burnpool" @click="onExit" variant="success">
+             {{$t('cow.harvest-unstake', {symbol: cow.stakeToken.symbol, symbol2: cow.yieldToken.symbol})}}
+            </b-button>
+            <b-button block v-else @click="onClaim" variant="success">
              {{$t('cow.harvest', {symbol: cow.yieldToken.symbol})}}
             </b-button>
           </div>
@@ -30,7 +33,7 @@
             <b-button block @click="onApprove" v-if="stakeAllowance.lte(toBigNumber(stakeAmount))" variant="danger" :disabled="btnApproving">
               <b-spinner small label="Loading..." v-if="btnApproving"></b-spinner>
               {{$t('cow.approve-symbol', {symbol: cow.stakeToken.symbol})}}
-            </b-button>s
+            </b-button>
             <b-button block v-else @click="$bvModal.show('stake-modal')" variant="primary">
               {{$t('cow.stake', {symbol: cow.stakeToken.symbol})}}
             </b-button>
@@ -41,10 +44,10 @@
     <br>
     <div class="row">
       <div class="col-12 text-center">
-        <b-button @click="$bvModal.show('unstake-modal')" v-if="cow.unstakeable" variant="primary">
+        <b-button @click="$bvModal.show('unstake-modal')" variant="primary">
           {{$t('cow.unstake', {symbol: cow.stakeToken.symbol})}}
         </b-button>
-        <b-button @click="onExit" v-if="cow.unstakeable" variant="primary">
+        <b-button @click="onExit" variant="primary">
           {{$t('cow.harvest-unstake', {symbol: cow.stakeToken.symbol, symbol2: cow.yieldToken.symbol})}}
         </b-button>
       </div>

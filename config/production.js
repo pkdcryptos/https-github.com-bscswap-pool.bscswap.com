@@ -4,23 +4,60 @@ module.exports = {
 	cows: [
 		{
 			id: 1,
-			name: "LOA DEFI STAKING POOL",
-			image: "https://tokens.bscswap.com/images/0x7661C7714A2AE18Bd224d2bFa7619d6aB7b8f640.png",
-			desc: "Halving every week, Withdrawal for BSWAP open November 11, 2020 7:00:00 AM UTC +0",
-			address: "0x0000000000000000000000000000000000000000",
+			name: "LFI BNB PRESALE POOL",
+			image: "https://tokens.bscswap.com/images/LFIBNB.png",
+			desc: "Halving every 2 days, Withdrawal for LFI open November 13, 2020 6:00:00 AM UTC +0",
+			initialized: true,
+			address: "0xF7441726283bB51Be9599D3011489aDeaa2b61c7",
 			stakeToken: {
-				address: "0x0000000000000000000000000000000000000000",
+				address: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
 				decimals: 18,
-				symbol: "LFI"
+				symbol: "WBNB"
 			},
 			yieldToken: {
-				address: "0x0000000000000000000000000000000000000000",
+				address: "0x7661C7714A2AE18Bd224d2bFa7619d6aB7b8f640",
 				decimals: 18,
-				symbol: "BSWAP"
+				symbol: "LFI"
 			}
 		},
 		{
 			id: 2,
+			name: "LFI BUSD PRESALE POOL",
+			image: "https://tokens.bscswap.com/images/LFIBUSD.png",
+			desc: "Halving every 2 days, Withdrawal for LFI open November 13, 2020 6:00:00 AM UTC +0",
+			initialized: true,
+			address: "0xA0E74fA146f923Eeb9737A33DDa5a4464FA730c5",
+			stakeToken: {
+				address: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+				decimals: 18,
+				symbol: "BUSD"
+			},
+			yieldToken: {
+				address: "0x7661C7714A2AE18Bd224d2bFa7619d6aB7b8f640",
+				decimals: 18,
+				symbol: "LFI"
+			}
+		},
+		{
+			id: 3,
+			name: "LFI CAKE PRESALE POOL",
+			image: "https://tokens.bscswap.com/images/LFICAKE.png",
+			desc: "Halving every 2 days, Withdrawal for LFI open November 13, 2020 6:00:00 AM UTC +0",
+			initialized: true,
+			address: "0xD6319A027Ec2Ca6842b4139D2F17b1a229f475CD",
+			stakeToken: {
+				address: "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+				decimals: 18,
+				symbol: "CAKE"
+			},
+			yieldToken: {
+				address: "0x7661C7714A2AE18Bd224d2bFa7619d6aB7b8f640",
+				decimals: 18,
+				symbol: "LFI"
+			}
+		},
+		{
+			id: 4,
 			name: "BSWAP WBNB PRESALE POOL",
 			image: "https://tokens.bscswap.com/images/BSWAPBNB.png",
 			desc: "Halving every 3 days, Withdrawal for BSWAP open November 11, 2020 6:00:00 AM UTC +0",
@@ -38,7 +75,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 3,
+			id: 5,
 			name: "BSWAP BAI PRESALE POOL",
 			image: "https://tokens.bscswap.com/images/BSWAPBAI.png",
 			desc: "Halving every 3 days, Withdrawal for BSWAP open November 11, 2020 6:00:00 AM UTC +0",
@@ -56,7 +93,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 4,
+			id: 6,
 			name: "BSWAP CAKE PRESALE POOL",
 			image: "https://tokens.bscswap.com/images/BSWAPCAKE.png",
 			desc: "Halving every 3 days, Withdrawal for BSWAP open November 11, 2020 6:00:00 AM UTC +0",
@@ -74,7 +111,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 5,
+			id: 7,
 			name: "BSWAP BURGER PRESALE POOL",
 			image: "https://tokens.bscswap.com/images/BSWAPBURGER.png",
 			desc: "Halving every 3 days, Withdrawal for BSWAP open November 11, 2020 6:00:00 AM UTC +0",
@@ -92,7 +129,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 6,
+			id: 8,
 			name: "BSWAP THUGS PRESALE POOL",
 			image: "https://tokens.bscswap.com/images/BSWAPTHUGS.png",
 			desc: "Halving every 3 days, Withdrawal for BSWAP open November 11, 2020 6:00:00 AM UTC +0",
@@ -110,7 +147,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 7,
+			id: 9,
 			name: "BSWAP DRUGS PRESALE POOL",
 			image: "https://tokens.bscswap.com/images/BSWAPDRUGS.png",
 			desc: "Halving every 3 days, Withdrawal for BSWAP open November 11, 2020 6:00:00 AM UTC +0",
@@ -128,7 +165,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 8,
+			id: 10,
 			name: "BSCSWAP DEGEN BURNING POOL",
 			image: "https://tokens.bscswap.com/images/0xacc234978A5eb941665fD051Ca48765610D82584.png",
 			desc: "Halving every week, Withdrawal for BSWAP open November 11, 2020 7:00:00 AM UTC +0",
@@ -147,7 +184,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 9,
+			id: 11,
 			name: "BSCSWAP BHC BURNING POOL",
 			image: "https://tokens.bscswap.com/images/0xacc234978A5eb941665fD051Ca48765610D82584.png",
 			desc: "Halving every week, Withdrawal for BSWAP open November 11, 2020 7:00:00 AM UTC +0",
@@ -166,7 +203,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 10,
+			id: 12,
 			name: "BSCSWAP EARTH BURNING POOL",
 			image: "https://tokens.bscswap.com/images/0xacc234978A5eb941665fD051Ca48765610D82584.png",
 			desc: "Halving every week, Withdrawal for BSWAP open November 11, 2020 7:00:00 AM UTC +0",
@@ -185,7 +222,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 11,
+			id: 13,
 			name: "BSCSWAP MOON BURNING POOL",
 			image: "https://tokens.bscswap.com/images/0xacc234978A5eb941665fD051Ca48765610D82584.png",
 			desc: "Halving every week, Withdrawal for BSWAP open November 11, 2020 7:00:00 AM UTC +0",
@@ -204,7 +241,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 12,
+			id: 14,
 			name: "BSCSWAP RABBIT BURNING POOL",
 			image: "https://tokens.bscswap.com/images/0xacc234978A5eb941665fD051Ca48765610D82584.png",
 			desc: "Halving every week, Withdrawal for BSWAP open November 11, 2020 7:00:00 AM UTC +0",
@@ -223,7 +260,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 13,
+			id: 15,
 			name: "REFUNDED rDEGEN BURNING POOL",
 			image: "https://tokens.bscswap.com/images/0xacc234978A5eb941665fD051Ca48765610D82584.png",
 			desc: "Halving every week, Withdrawal for BSWAP open November 11, 2020 7:00:00 AM UTC +0",
@@ -242,7 +279,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 14,
+			id: 16,
 			name: "REFUNDED rBHC BURNING POOL",
 			image: "https://tokens.bscswap.com/images/0xacc234978A5eb941665fD051Ca48765610D82584.png",
 			desc: "Halving every week, Withdrawal for BSWAP open November 11, 2020 7:00:00 AM UTC +0",
@@ -261,7 +298,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 15,
+			id: 17,
 			name: "REFUNDED rEARTH BURNING POOL",
 			image: "https://tokens.bscswap.com/images/0xacc234978A5eb941665fD051Ca48765610D82584.png",
 			desc: "Halving every week, Withdrawal for BSWAP open November 11, 2020 7:00:00 AM UTC +0",
@@ -280,7 +317,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 16,
+			id: 18,
 			name: "REFUNDED rMOON BURNING POOL",
 			image: "https://tokens.bscswap.com/images/0xacc234978A5eb941665fD051Ca48765610D82584.png",
 			desc: "Halving every week, Withdrawal for BSWAP open November 11, 2020 7:00:00 AM UTC +0",
@@ -299,7 +336,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 17,
+			id: 19,
 			name: "REFUNDED rRABBIT BURNING POOL",
 			image: "https://tokens.bscswap.com/images/0xacc234978A5eb941665fD051Ca48765610D82584.png",
 			desc: "Halving every week, Withdrawal for BSWAP open November 11, 2020 7:00:00 AM UTC +0",
@@ -318,7 +355,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 18,
+			id: 20,
 			name: "MOON USDT Pool",
 			image: "https://tokens.bscswap.com/images/0x9e90aF2Ea159190c84012b09067689ba8ac0d9B3.png",
 			desc: "Halving every week, 5% Pool Fee for deposits",
@@ -336,7 +373,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 19,
+			id: 21,
 			name: "EARTH USDT Pool",
 			image: "https://tokens.bscswap.com/images/0x3BEE8422f2e6F99C43351ebe53B0b7A6c3079255.png",
 			desc: "Halving every week, 5% Pool Fee for deposits",
@@ -354,7 +391,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 20,
+			id: 22,
 			name: "MOON/USDT LP Pool",
 			image: "https://tokens.bscswap.com/images/0x9e90aF2Ea159190c84012b09067689ba8ac0d9B3.png",
 			desc: "Halving every week, zero pool fee, no withdrawal limit",
@@ -372,7 +409,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 21,
+			id: 23,
 			name: "EARTH/USDT LP Pool",
 			image: "https://tokens.bscswap.com/images/0x9e90aF2Ea159190c84012b09067689ba8ac0d9B3.png",
 			desc: "Halving every week, zero pool fee, no withdrawal limit",
@@ -390,7 +427,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 22,
+			id: 24,
 			name: "USDT/BNB LP Pool",
 			image: "https://tokens.bscswap.com/images/0x9e90aF2Ea159190c84012b09067689ba8ac0d9B3.png",
 			desc: "Halving every week, zero pool fee, no withdrawal limit",
@@ -408,7 +445,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 23,
+			id: 25,
 			name: "BHC DEGEN/BNB LP Pool",
 			image: "https://tokens.bscswap.com/images/0xA6381C6Fd8f40A44721eF4f61eDc1a8CCCa7BF3d.png",
 			desc: "Halving every week, 5% Pool Fee for deposits",
@@ -426,7 +463,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 24,
+			id: 26,
 			name: "BHC BHC/BNB LP Pool",
 			image: "https://tokens.bscswap.com/images/0xA6381C6Fd8f40A44721eF4f61eDc1a8CCCa7BF3d.png",
 			desc: "Halving every week, 5% Pool Fee for deposits",
@@ -444,7 +481,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 25,
+			id: 27,
 			name: "BHC EARTH/BNB LP Pool",
 			image: "https://tokens.bscswap.com/images/0xA6381C6Fd8f40A44721eF4f61eDc1a8CCCa7BF3d.png",
 			desc: "Halving every week, 5% Pool Fee for deposits",
@@ -462,7 +499,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 26,
+			id: 28,
 			name: "BHC BNB/BUSD LP Pool",
 			image: "https://tokens.bscswap.com/images/0xA6381C6Fd8f40A44721eF4f61eDc1a8CCCa7BF3d.png",
 			desc: "Halving every week, 5% Pool Fee for deposits",
@@ -480,7 +517,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 27,
+			id: 29,
 			name: "BHC BURNING POOL",
 			image: "https://tokens.bscswap.com/images/BHCBNB.png",
 			desc: "Halving every day",
@@ -498,7 +535,7 @@ module.exports = {
 			}
 		},
 		{
-			id: 28,
+			id: 30,
 			name: "Degenerates Liquidity Staking Pool",
 			image: "https://tokens.bscswap.com/images/0xb37B51C5C4C934468B49b55FeC15e76c9b538fF3.png",
 			desc: "Halving every year, 1 DEGEN required on your account to participate, Withdrawal open October 6, 2020 5:00:00 PM UTC +0",
@@ -544,5 +581,6 @@ module.exports = {
 	pair_BURGER_BNB: "0x7ac55ac530f2C29659573Bde0700c6758D69e677",
 	pair_THUGS_BNB: "0x71c1B6302c7F9C49EE3E675224B22CdE34Ab5AC7",
 	pair_DRUGS_BNB: "0xcDca558128bfc645E6685E1EEc2e6d5a8fD74cb6",
+	pair_LFI_BNB: "0x506f458FCFD60a49eb688842D49269305392367C",
 	web3Provider: "https://bsc-dataseed1.defibit.io"
 }

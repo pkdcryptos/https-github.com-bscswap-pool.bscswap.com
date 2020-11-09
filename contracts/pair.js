@@ -95,6 +95,13 @@ export class Pair {
 		return reserves[0] / reserves[1]
 	}
 
+	async getPriceOfLFIBNB() {
+		this.address = config.pair_LFI_BNB;
+		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, this.address)
+		let reserves = await this.contract.methods.getReserves().call();
+		return reserves[1] / reserves[0]
+	}
+
 	async totalSupply() {
 		return await this.contract.methods.totalSupply().call();
 	}

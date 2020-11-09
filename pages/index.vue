@@ -13,12 +13,8 @@
     </div>
     <br>
     <div class="price alert alert-success">
-      1 $BSWAP = {{ priceBSWAPUSDT ? priceBSWAPUSDT.toFixed(4) : '--' }} $USDT /
-      1 $DEGEN = {{ priceDEGENBUSD ? priceDEGENBUSD.toFixed(4) : '--' }} $BUSD /
-      0.00001 $RABBIT = {{ priceRABBITUSDT ? priceRABBITUSDT.div(100000).toFixed(4) : '--' }} $USDT /
-      0.00001 $MOON = {{ priceMOONUSDT ? priceMOONUSDT.div(100000).toFixed(4) : '--' }} $USDT /
-      0.00001 $EARTH = {{ priceEARTHBUSD ? priceEARTHBUSD.div(100000).toFixed(4) : '--' }} $BUSD /
-      1 $BHC = {{ priceBHCBUSD ? priceBHCBUSD.toFixed(4) : '--' }} $BUSD
+      1 $BSWAP = {{ priceBSWAPUSDT ? priceBSWAPUSDT.toFixed(4) : '--' }} $BAI /
+      10000 $LFI = {{ priceLFIBAI ? priceLFIBAI.times(10000).toFixed(4) : '--' }} $BUSD
     </div>
 
     <br>
@@ -52,15 +48,8 @@
     data () {
       return {
         cows: config.cows,
-        priceDEGENBUSD: null,
-        priceDEGENBNB: null,
-        priceBHCBUSD: null,
-        priceBHCBNB: null,
-        priceEARTHBUSD: null,
-        priceEARTHBNB: null,
-        priceRABBITUSDT: null,
-        priceMOONUSDT: null,
         priceBSWAPUSDT: null,
+        priceLFIBAI: null,
         apy: {
           1: '--',
           2: '--',
@@ -89,7 +78,9 @@
           25: '--',
           26: '--',
           27: '--',
-          28: '--'
+          28: '--',
+          29: '--',
+          30: '--'
         }
       }
     },
@@ -98,7 +89,7 @@
     },
     async mounted() {
       let pair = new Pair()
-      let promises = [ pair.getPriceOfBNBBUSD(), pair.getPriceOfDEGENBNB(), pair.getPriceOfBHCBNB(), pair.getPriceOfEARTHBNB(), pair.getPriceOfBUSDBNB(), pair.getPriceOfMOONUSDT(), pair.getPriceOfRABBITUSDT(), pair.getPriceOfBSWAPUSDT(), pair.getPriceOfCAKEBNB(), pair.getPriceOfBURGERBNB(), pair.getPriceOfTHUGSBNB(), pair.getPriceOfDRUGSBNB() ];
+      let promises = [ pair.getPriceOfBNBBUSD(), pair.getPriceOfDEGENBNB(), pair.getPriceOfBHCBNB(), pair.getPriceOfEARTHBNB(), pair.getPriceOfBUSDBNB(), pair.getPriceOfMOONUSDT(), pair.getPriceOfRABBITUSDT(), pair.getPriceOfBSWAPUSDT(), pair.getPriceOfCAKEBNB(), pair.getPriceOfBURGERBNB(), pair.getPriceOfTHUGSBNB(), pair.getPriceOfDRUGSBNB(), pair.getPriceOfLFIBNB() ];
       let prices = await Promise.all(promises);
 
       this.priceDEGENBUSD = BigNumber(prices[0]).times(BigNumber(prices[1]));
@@ -117,6 +108,8 @@
       this.priceBURGERBNB = BigNumber(prices[9]);
       this.priceTHUGSBNB = BigNumber(prices[10]);
       this.priceDRUGSBNB = BigNumber(prices[11]);
+      this.priceLFIBNB = BigNumber(prices[12]);
+      this.priceLFIBAI = BigNumber(prices[0]).times(BigNumber(prices[12]));
 
       this.cows.map(async(cow) => {
         if(cow.initialized) {
@@ -126,22 +119,24 @@
           let balance = await cowReader.totalSupply();
           let rewards = rewardRate.times(365 * 24 * 60 * 60).div(balance)
 
-          if(cow.id == 2) {
-            this.apy[2] = rewards.times(this.priceBSWAPBNB).times(100).toFixed(2)
+          if(cow.id == 1) {
+            this.apy[1] = rewards.times(this.priceLFIBNB).times(100).toFixed(2)
+          } else if(cow.id == 2) {
+            this.apy[2] = rewards.times(this.priceLFIBAI).times(100).toFixed(2)
           } else if(cow.id == 3) {
-            this.apy[3] = rewards.times(this.priceBSWAPUSDT).times(100).toFixed(2)
+            this.apy[3] = rewards.times(this.priceLFIBNB).div(this.priceCAKEBNB.plus(1)).times(100).toFixed(2)
           } else if(cow.id == 4) {
-            this.apy[4] = rewards.times(this.priceBSWAPBNB).div(this.priceCAKEBNB.plus(1)).times(100).toFixed(2)
+            this.apy[4] = rewards.times(this.priceBSWAPBNB).times(100).toFixed(2)
           } else if(cow.id == 5) {
-            this.apy[5] = rewards.times(this.priceBSWAPBNB).div(this.priceBURGERBNB.plus(1)).times(100).toFixed(2)
+            this.apy[5] = rewards.times(this.priceBSWAPUSDT).times(100).toFixed(2)
           } else if(cow.id == 6) {
-            this.apy[6] = rewards.times(this.priceBSWAPBNB).div(this.priceTHUGSBNB.plus(1)).times(100).toFixed(2)
+            this.apy[6] = rewards.times(this.priceBSWAPBNB).div(this.priceCAKEBNB.plus(1)).times(100).toFixed(2)
           } else if(cow.id == 7) {
-            this.apy[7] = rewards.times(this.priceBSWAPBNB).div(this.priceDRUGSBNB.plus(1)).times(100).toFixed(2)
+            this.apy[7] = rewards.times(this.priceBSWAPBNB).div(this.priceBURGERBNB.plus(1)).times(100).toFixed(2)
           } else if(cow.id == 8) {
-            this.apy[8] = new BigNumber(0)
+            this.apy[8] = rewards.times(this.priceBSWAPBNB).div(this.priceTHUGSBNB.plus(1)).times(100).toFixed(2)
           } else if(cow.id == 9) {
-            this.apy[9] = new BigNumber(0)
+            this.apy[9] = rewards.times(this.priceBSWAPBNB).div(this.priceDRUGSBNB.plus(1)).times(100).toFixed(2)
           } else if(cow.id == 10) {
             this.apy[10] = new BigNumber(0)
           } else if(cow.id == 11) {
@@ -159,27 +154,31 @@
           } else if(cow.id == 17) {
             this.apy[17] = new BigNumber(0)
           } else if(cow.id == 18) {
-            this.apy[18] = rewards.times(this.priceMOONUSDT).times(100).toFixed(2)
+            this.apy[18] = new BigNumber(0)
           } else if(cow.id == 19) {
-            this.apy[19] = rewards.times(this.priceEARTHBUSD).times(100).toFixed(2)
+            this.apy[19] = new BigNumber(0)
           } else if(cow.id == 20) {
-            this.apy[20] = rewards.times(this.priceMOONUSDT).div(this.priceMOONUSDT.plus(1)).times(100).toFixed(2)
+            this.apy[20] = rewards.times(this.priceMOONUSDT).times(100).toFixed(2)
           } else if(cow.id == 21) {
-            this.apy[21] = rewards.times(this.priceMOONUSDT).div(this.priceEARTHBUSD.plus(1)).times(100).toFixed(2)
+            this.apy[21] = rewards.times(this.priceEARTHBUSD).times(100).toFixed(2)
           } else if(cow.id == 22) {
-            this.apy[22] = rewards.times(this.priceMOONUSDT).div(this.priceBNBBUSD.plus(1)).times(100).toFixed(2)
+            this.apy[22] = rewards.times(this.priceMOONUSDT).div(this.priceMOONUSDT.plus(1)).times(100).toFixed(2)
           } else if(cow.id == 23) {
-            this.apy[23] = rewards.times(this.priceBHCBNB).div(this.priceDEGENBNB.plus(1)).times(100).toFixed(2)
+            this.apy[23] = rewards.times(this.priceMOONUSDT).div(this.priceEARTHBUSD.plus(1)).times(100).toFixed(2)
           } else if(cow.id == 24) {
-            this.apy[24] = rewards.times(this.priceBHCBNB).div(this.priceBHCBNB.plus(1)).times(100).toFixed(2)
+            this.apy[24] = rewards.times(this.priceMOONUSDT).div(this.priceBNBBUSD.plus(1)).times(100).toFixed(2)
           } else if(cow.id == 25) {
-            this.apy[25] = rewards.times(this.priceBHCBNB).div(this.priceEARTHBNB.plus(1)).times(100).toFixed(2)
+            this.apy[25] = rewards.times(this.priceBHCBNB).div(this.priceDEGENBNB.plus(1)).times(100).toFixed(2)
           } else if(cow.id == 26) {
-            this.apy[26] = rewards.times(this.priceBHCBNB).div(this.priceBUSDBNB.plus(1)).times(100).toFixed(2)
+            this.apy[26] = rewards.times(this.priceBHCBNB).div(this.priceBHCBNB.plus(1)).times(100).toFixed(2)
           } else if(cow.id == 27) {
-            this.apy[27] = new BigNumber(0)
+            this.apy[27] = rewards.times(this.priceBHCBNB).div(this.priceEARTHBNB.plus(1)).times(100).toFixed(2)
           } else if(cow.id == 28) {
-            this.apy[28] = rewards.times(this.priceDEGENBNB).div(this.priceDEGENBNB.plus(1)).times(100).toFixed(2)
+            this.apy[28] = rewards.times(this.priceBHCBNB).div(this.priceBUSDBNB.plus(1)).times(100).toFixed(2)
+          } else if(cow.id == 29) {
+            this.apy[29] = new BigNumber(0)
+          } else if(cow.id == 30) {
+            this.apy[30] = rewards.times(this.priceDEGENBNB).div(this.priceDEGENBNB.plus(1)).times(100).toFixed(2)
           }
         }
         return cow

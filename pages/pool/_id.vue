@@ -17,7 +17,7 @@
             <h5 class="card-title">{{ rewards }}</h5>
             <p class="card-text">{{$t('cow.earned', {symbol: cow.yieldToken.symbol})}}</p>
             <b-button block v-if="cow.burnpool" @click="onExit" variant="success">
-             {{$t('cow.harvest-unstake', {symbol: cow.stakeToken.symbol, symbol2: cow.yieldToken.symbol})}}
+             {{$t('cow.harvest', {symbol: cow.yieldToken.symbol})}}
             </b-button>
             <b-button block v-else @click="onClaim" variant="success">
              {{$t('cow.harvest', {symbol: cow.yieldToken.symbol})}}
@@ -44,10 +44,10 @@
     <br>
     <div class="row">
       <div class="col-12 text-center">
-        <b-button @click="$bvModal.show('unstake-modal')" variant="primary">
+        <b-button v-if="cow.staking" @click="$bvModal.show('unstake-modal')" variant="primary">
           {{$t('cow.unstake', {symbol: cow.stakeToken.symbol})}}
         </b-button>
-        <b-button @click="onExit" variant="primary">
+        <b-button v-if="cow.staking" @click="onExit" variant="primary">
           {{$t('cow.harvest-unstake', {symbol: cow.stakeToken.symbol, symbol2: cow.yieldToken.symbol})}}
         </b-button>
       </div>

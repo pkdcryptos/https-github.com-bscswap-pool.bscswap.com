@@ -360,6 +360,7 @@ module.exports = {
 			image: "https://tokens.bscswap.com/images/0x9e90aF2Ea159190c84012b09067689ba8ac0d9B3.png",
 			desc: "Halving every week, 5% Pool Fee for deposits",
 			initialized: true,
+			staking: true,
 			address: "0x73605bff9baf9797Eb6d15458108Ea9FD628Bb62",
 			stakeToken: {
 				address: "0x55d398326f99059fF775485246999027B3197955",
@@ -378,6 +379,7 @@ module.exports = {
 			image: "https://tokens.bscswap.com/images/0x3BEE8422f2e6F99C43351ebe53B0b7A6c3079255.png",
 			desc: "Halving every week, 5% Pool Fee for deposits",
 			initialized: true,
+			staking: true,
 			address: "0xED04964388Af73916fdc4Ef86ABfDb98F96D8ECb",
 			stakeToken: {
 				address: "0x55d398326f99059fF775485246999027B3197955",
@@ -396,6 +398,7 @@ module.exports = {
 			image: "https://tokens.bscswap.com/images/0x9e90aF2Ea159190c84012b09067689ba8ac0d9B3.png",
 			desc: "Halving every week, zero pool fee, no withdrawal limit",
 			initialized: true,
+			staking: true,
 			address: "0x43FcbeC712569285d0FE07c6F1302361E5Ea6559",
 			stakeToken: {
 				address: "0xdAb2bF2480a3Ea844BA03Cf06a3cE454511a81C2",
@@ -414,6 +417,7 @@ module.exports = {
 			image: "https://tokens.bscswap.com/images/0x9e90aF2Ea159190c84012b09067689ba8ac0d9B3.png",
 			desc: "Halving every week, zero pool fee, no withdrawal limit",
 			initialized: true,
+			staking: true,
 			address: "0xeE3c30085fFc4109D5DB291f31fa0ED939aeEe5D",
 			stakeToken: {
 				address: "0x07EFf53Fdb1373DD88d1332DA1F39F285a0D9696",
@@ -432,6 +436,7 @@ module.exports = {
 			image: "https://tokens.bscswap.com/images/0x9e90aF2Ea159190c84012b09067689ba8ac0d9B3.png",
 			desc: "Halving every week, zero pool fee, no withdrawal limit",
 			initialized: true,
+			staking: true,
 			address: "0xDb9919B59526f3355044c140Fe3f3B90980ca680",
 			stakeToken: {
 				address: "0x12E048d01535e2b49675d22078f64Fd2307d8A0c",
@@ -450,6 +455,7 @@ module.exports = {
 			image: "https://tokens.bscswap.com/images/0xA6381C6Fd8f40A44721eF4f61eDc1a8CCCa7BF3d.png",
 			desc: "Halving every week, 5% Pool Fee for deposits",
 			initialized: true,
+			staking: true,
 			address: "0xe5e2D9e9742f6622FFf44001517eB6b27a794e6A",
 			stakeToken: {
 				address: "0x74ED229d5CC16678876310a7F67Ca13B541BE11d",
@@ -468,6 +474,7 @@ module.exports = {
 			image: "https://tokens.bscswap.com/images/0xA6381C6Fd8f40A44721eF4f61eDc1a8CCCa7BF3d.png",
 			desc: "Halving every week, 5% Pool Fee for deposits",
 			initialized: true,
+			staking: true,
 			address: "0x1D98cbDf1eAd407a58290a0208C06F6e1D4Cd7fA",
 			stakeToken: {
 				address: "0xe99cE38eEbdc4b3d5F8FeD6DBf19240c969FcbD1",
@@ -486,6 +493,7 @@ module.exports = {
 			image: "https://tokens.bscswap.com/images/0xA6381C6Fd8f40A44721eF4f61eDc1a8CCCa7BF3d.png",
 			desc: "Halving every week, 5% Pool Fee for deposits",
 			initialized: true,
+			staking: true,
 			address: "0xE394b087889d6d2E8eBa110bFe376079E3C2682A",
 			stakeToken: {
 				address: "0x38C2b18e5E7f9b3D9ee1F7658cE2172058d99A69",
@@ -504,6 +512,7 @@ module.exports = {
 			image: "https://tokens.bscswap.com/images/0xA6381C6Fd8f40A44721eF4f61eDc1a8CCCa7BF3d.png",
 			desc: "Halving every week, 5% Pool Fee for deposits",
 			initialized: true,
+			staking: true,
 			address: "0x62d6eeAf4e1895ce72bf10f8b0Dbdb0E1DD4CB08",
 			stakeToken: {
 				address: "0x1EbF0eE99971c6269062C3b480e8e23B7A74756B",
@@ -540,6 +549,7 @@ module.exports = {
 			image: "https://tokens.bscswap.com/images/0xb37B51C5C4C934468B49b55FeC15e76c9b538fF3.png",
 			desc: "Halving every year, 1 DEGEN required on your account to participate, Withdrawal open October 6, 2020 5:00:00 PM UTC +0",
 			initialized: true,
+			staking: true,
 			address: "0x4eC29949C9288792420f2605fe2bc47530397968",
 			stakeToken: {
 				address: "0x74ED229d5CC16678876310a7F67Ca13B541BE11d",

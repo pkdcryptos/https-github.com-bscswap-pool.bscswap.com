@@ -102,6 +102,27 @@ export class Pair {
 		return reserves[1] / reserves[0]
 	}
 
+	async getPriceOfBTCBNB() {
+		this.address = config.pair_BTC_BNB;
+		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, this.address)
+		let reserves = await this.contract.methods.getReserves().call();
+		return reserves[1] / reserves[0]
+	}
+
+	async getPriceOfETHBNB() {
+		this.address = config.pair_ETH_BNB;
+		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, this.address)
+		let reserves = await this.contract.methods.getReserves().call();
+		return reserves[1] / reserves[0]
+	}
+
+	async getPriceOfEOSBNB() {
+		this.address = config.pair_EOS_BNB;
+		this.contract = new this.web3.eth.Contract(UNISWAP_PAIR, this.address)
+		let reserves = await this.contract.methods.getReserves().call();
+		return reserves[1] / reserves[0]
+	}
+
 	async totalSupply() {
 		return await this.contract.methods.totalSupply().call();
 	}

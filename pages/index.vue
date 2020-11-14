@@ -83,7 +83,13 @@
           30: '--',
           31: '--',
           32: '--',
-          33: '--'
+          33: '--',
+          34: '--',
+          35: '--',
+          36: '--',
+          37: '--',
+          38: '--',
+          39: '--'
         }
       }
     },
@@ -92,7 +98,7 @@
     },
     async mounted() {
       let pair = new Pair()
-      let promises = [ pair.getPriceOfBNBBUSD(), pair.getPriceOfDEGENBNB(), pair.getPriceOfBHCBNB(), pair.getPriceOfEARTHBNB(), pair.getPriceOfBUSDBNB(), pair.getPriceOfMOONUSDT(), pair.getPriceOfRABBITUSDT(), pair.getPriceOfBSWAPUSDT(), pair.getPriceOfCAKEBNB(), pair.getPriceOfBURGERBNB(), pair.getPriceOfTHUGSBNB(), pair.getPriceOfDRUGSBNB(), pair.getPriceOfLFIBNB() ];
+      let promises = [ pair.getPriceOfBNBBUSD(), pair.getPriceOfDEGENBNB(), pair.getPriceOfBHCBNB(), pair.getPriceOfEARTHBNB(), pair.getPriceOfBUSDBNB(), pair.getPriceOfMOONUSDT(), pair.getPriceOfRABBITUSDT(), pair.getPriceOfBSWAPUSDT(), pair.getPriceOfCAKEBNB(), pair.getPriceOfBURGERBNB(), pair.getPriceOfTHUGSBNB(), pair.getPriceOfDRUGSBNB(), pair.getPriceOfLFIBNB(), pair.getPriceOfBTCBNB(), pair.getPriceOfETHBNB(), pair.getPriceOfEOSBNB() ];
       let prices = await Promise.all(promises);
 
       this.priceDEGENBUSD = BigNumber(prices[0]).times(BigNumber(prices[1]));
@@ -113,6 +119,9 @@
       this.priceDRUGSBNB = BigNumber(prices[11]);
       this.priceLFIBNB = BigNumber(prices[12]);
       this.priceLFIBAI = BigNumber(prices[0]).times(BigNumber(prices[12]));
+      this.priceBTCBNB = BigNumber(prices[13]);
+      this.priceETHBNB = BigNumber(prices[14]);
+      this.priceEOSBNB = BigNumber(prices[15]);
 
       this.cows.map(async(cow) => {
         if(cow.initialized) {
@@ -125,39 +134,39 @@
           if(cow.id == 1) {
             this.apy[1] = rewards.times(100).toFixed(2)
           } else if(cow.id == 2) {
-            this.apy[2] = "Infinity"
+            this.apy[2] = rewards.times(this.priceLFIBNB).div(this.priceLFIBNB.plus(1)).times(100).toFixed(2)
           } else if(cow.id == 3) {
-            this.apy[3] = rewards.times(this.priceLFIBNB).times(100).toFixed(2)
+            this.apy[3] = rewards.times(this.priceLFIBNB).div(this.priceBUSDBNB.plus(1)).times(100).toFixed(2)
           } else if(cow.id == 4) {
-            this.apy[4] = rewards.times(this.priceLFIBAI).times(100).toFixed(2)
+            this.apy[4] = rewards.times(this.priceLFIBNB).div(this.priceBTCBNB.plus(1)).times(100).toFixed(2)
           } else if(cow.id == 5) {
-            this.apy[5] = rewards.times(this.priceLFIBNB).div(this.priceCAKEBNB).times(100).toFixed(2)
+            this.apy[5] = rewards.times(this.priceLFIBNB).div(this.priceETHBNB.plus(1)).times(100).toFixed(2)
           } else if(cow.id == 6) {
-            this.apy[6] = rewards.times(100).toFixed(2)
+            this.apy[6] = rewards.times(this.priceLFIBNB).div(this.priceEOSBNB.plus(1)).times(100).toFixed(2)
           } else if(cow.id == 7) {
-            this.apy[7] = rewards.times(this.priceBSWAPBNB).times(100).toFixed(2)
+            this.apy[7] = rewards.times(this.priceLFIBAI).times(50).toFixed(2)
           } else if(cow.id == 8) {
-            this.apy[8] = rewards.times(this.priceBSWAPUSDT).times(100).toFixed(2)
+            this.apy[8] = "Infinity"
           } else if(cow.id == 9) {
-            this.apy[9] = rewards.times(this.priceBSWAPBNB).div(this.priceCAKEBNB).times(100).toFixed(2)
+            this.apy[9] = rewards.times(this.priceLFIBNB).times(100).toFixed(2)
           } else if(cow.id == 10) {
-            this.apy[10] = rewards.times(this.priceBSWAPBNB).div(this.priceBURGERBNB).times(100).toFixed(2)
+            this.apy[10] = rewards.times(this.priceLFIBAI).times(100).toFixed(2)
           } else if(cow.id == 11) {
-            this.apy[11] = rewards.times(this.priceBSWAPBNB).div(this.priceTHUGSBNB).times(100).toFixed(2)
+            this.apy[11] = rewards.times(this.priceLFIBNB).div(this.priceCAKEBNB).times(100).toFixed(2)
           } else if(cow.id == 12) {
-            this.apy[12] = rewards.times(this.priceBSWAPBNB).div(this.priceDRUGSBNB).times(100).toFixed(2)
+            this.apy[12] = rewards.times(100).toFixed(2)
           } else if(cow.id == 13) {
-            this.apy[13] = new BigNumber(0)
+            this.apy[13] = rewards.times(this.priceBSWAPBNB).times(100).toFixed(2)
           } else if(cow.id == 14) {
-            this.apy[14] = new BigNumber(0)
+            this.apy[14] = rewards.times(this.priceBSWAPUSDT).times(100).toFixed(2)
           } else if(cow.id == 15) {
-            this.apy[15] = new BigNumber(0)
+            this.apy[15] = rewards.times(this.priceBSWAPBNB).div(this.priceCAKEBNB).times(100).toFixed(2)
           } else if(cow.id == 16) {
-            this.apy[16] = new BigNumber(0)
+            this.apy[16] = rewards.times(this.priceBSWAPBNB).div(this.priceBURGERBNB).times(100).toFixed(2)
           } else if(cow.id == 17) {
-            this.apy[17] = new BigNumber(0)
+            this.apy[17] = rewards.times(this.priceBSWAPBNB).div(this.priceTHUGSBNB).times(100).toFixed(2)
           } else if(cow.id == 18) {
-            this.apy[18] = new BigNumber(0)
+            this.apy[18] = rewards.times(this.priceBSWAPBNB).div(this.priceDRUGSBNB).times(100).toFixed(2)
           } else if(cow.id == 19) {
             this.apy[19] = new BigNumber(0)
           } else if(cow.id == 20) {
@@ -167,27 +176,39 @@
           } else if(cow.id == 22) {
             this.apy[22] = new BigNumber(0)
           } else if(cow.id == 23) {
-            this.apy[23] = rewards.times(this.priceMOONUSDT).times(100).toFixed(2)
+            this.apy[23] = new BigNumber(0)
           } else if(cow.id == 24) {
-            this.apy[24] = rewards.times(this.priceEARTHBUSD).times(100).toFixed(2)
+            this.apy[24] = new BigNumber(0)
           } else if(cow.id == 25) {
-            this.apy[25] = rewards.times(this.priceMOONUSDT).div(this.priceMOONUSDT.plus(1)).times(100).toFixed(2)
+            this.apy[25] = new BigNumber(0)
           } else if(cow.id == 26) {
-            this.apy[26] = rewards.times(this.priceMOONUSDT).div(this.priceEARTHBUSD.plus(1)).times(100).toFixed(2)
+            this.apy[26] = new BigNumber(0)
           } else if(cow.id == 27) {
-            this.apy[27] = rewards.times(this.priceMOONUSDT).div(this.priceBNBBUSD.plus(1)).times(100).toFixed(2)
+            this.apy[27] = new BigNumber(0)
           } else if(cow.id == 28) {
-            this.apy[28] = rewards.times(this.priceBHCBNB).div(this.priceDEGENBNB.plus(1)).times(100).toFixed(2)
+            this.apy[28] = new BigNumber(0)
           } else if(cow.id == 29) {
-            this.apy[29] = rewards.times(this.priceBHCBNB).div(this.priceBHCBNB.plus(1)).times(100).toFixed(2)
+            this.apy[29] = rewards.times(this.priceMOONUSDT).times(100).toFixed(2)
           } else if(cow.id == 30) {
-            this.apy[30] = rewards.times(this.priceBHCBNB).div(this.priceEARTHBNB.plus(1)).times(100).toFixed(2)
+            this.apy[30] = rewards.times(this.priceEARTHBUSD).times(100).toFixed(2)
           } else if(cow.id == 31) {
-            this.apy[31] = rewards.times(this.priceBHCBNB).div(this.priceBUSDBNB.plus(1)).times(100).toFixed(2)
+            this.apy[31] = rewards.times(this.priceMOONUSDT).div(this.priceMOONUSDT.plus(1)).times(100).toFixed(2)
           } else if(cow.id == 32) {
-            this.apy[32] = new BigNumber(0)
+            this.apy[32] = rewards.times(this.priceMOONUSDT).div(this.priceEARTHBUSD.plus(1)).times(100).toFixed(2)
           } else if(cow.id == 33) {
-            this.apy[33] = rewards.times(this.priceDEGENBNB).div(this.priceDEGENBNB.plus(1)).times(100).toFixed(2)
+            this.apy[33] = rewards.times(this.priceMOONUSDT).div(this.priceBNBBUSD.plus(1)).times(100).toFixed(2)
+          } else if(cow.id == 34) {
+            this.apy[34] = rewards.times(this.priceBHCBNB).div(this.priceDEGENBNB.plus(1)).times(100).toFixed(2)
+          } else if(cow.id == 35) {
+            this.apy[35] = rewards.times(this.priceBHCBNB).div(this.priceBHCBNB.plus(1)).times(100).toFixed(2)
+          } else if(cow.id == 36) {
+            this.apy[36] = rewards.times(this.priceBHCBNB).div(this.priceEARTHBNB.plus(1)).times(100).toFixed(2)
+          } else if(cow.id == 37) {
+            this.apy[37] = rewards.times(this.priceBHCBNB).div(this.priceBUSDBNB.plus(1)).times(100).toFixed(2)
+          } else if(cow.id == 38) {
+            this.apy[38] = new BigNumber(0)
+          } else if(cow.id == 39) {
+            this.apy[39] = rewards.times(this.priceDEGENBNB).div(this.priceDEGENBNB.plus(1)).times(100).toFixed(2)
           }
         }
         return cow

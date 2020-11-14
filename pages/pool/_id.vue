@@ -11,7 +11,7 @@
     </div>
     <br>
     <div class="row">
-      <div class="col-6">
+      <div v-if="cow.harvest" class="col-6">
         <div class="card text-center">
           <div class="card-body">
             <h5 class="card-title">{{ rewards }}</h5>
@@ -240,7 +240,6 @@
           this.txStatus = 'error';
         })
       },
-
       onExit() {
         if(!this.cowLoaded()) return;
         if(!confirm("Are you sure to exit?")) return;
